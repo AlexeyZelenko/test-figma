@@ -5,59 +5,77 @@
       <form @submit.prevent="onSubmit" class="form">
         <div class="form-group" :class="{ 'error': errors.firstName }">
           <label for="firstName">Ім'я</label>
-          <input
-              id="firstName"
-              v-model="form.firstName"
-              @blur="validateField('firstName')"
-              @input="validateField('firstName')"
-              type="text"
-              placeholder="Введіть ім'я"
-              :class="{ 'error': errors.firstName }"
-          />
+          <div class="input-wrapper">
+            <input
+                id="firstName"
+                v-model="form.firstName"
+                @blur="validateField('firstName')"
+                @input="validateField('firstName')"
+                type="text"
+                placeholder="Введіть ім'я"
+                :class="{ 'error': errors.firstName }"
+            />
+            <span v-if="errors.firstName" class="error-icon">
+              <img src="/iconError.svg">
+            </span>
+          </div>
           <span class="error-message" v-if="errors.firstName">{{ errors.firstName }}</span>
         </div>
 
+
         <div class="form-group" :class="{ 'error': errors.lastName }">
           <label for="lastName">Прізвище</label>
-          <input
-              id="lastName"
-              v-model="form.lastName"
-              @blur="validateField('lastName')"
-              @input="validateField('lastName')"
-              type="text"
-              placeholder="Введіть прізвище"
-              :class="{ 'error': errors.lastName }"
-          />
-          <span class="error-message" v-if="errors.lastName">{{ errors.lastName }}</span>
+          <div class="input-wrapper">
+            <input
+                id="lastName"
+                v-model="form.lastName"
+                @blur="validateField('lastName')"
+                @input="validateField('lastName')"
+                type="text"
+                placeholder="Введіть прізвище"
+                :class="{ 'error': errors.lastName }"
+            />
+            <span v-if="errors.lastName" class="error-icon">
+              <img src="/iconError.svg">
+            </span>
+          </div>
         </div>
 
         <div class="form-group" :class="{ 'error': errors.ipn }">
           <label for="ipn">ІПН</label>
-          <input
-              id="ipn"
-              v-model="form.ipn"
-              @blur="validateField('ipn')"
-              @input="validateField('ipn')"
-              type="text"
-              @keypress="numberOnly"
-              :class="{ 'error': errors.ipn }"
-          />
-          <span class="error-message" v-if="errors.ipn">{{ errors.ipn }}</span>
+          <div class="input-wrapper">
+            <input
+                id="ipn"
+                v-model="form.ipn"
+                @blur="validateField('ipn')"
+                @input="validateField('ipn')"
+                type="text"
+                @keypress="numberOnly"
+                :class="{ 'error': errors.ipn }"
+            />
+            <span v-if="errors.ipn" class="error-icon">
+              <img src="/iconError.svg">
+            </span>
+          </div>
         </div>
 
         <div class="form-group" :class="{ 'error': errors.amount }">
           <label for="amount">Сума угоди</label>
-          <input
-              id="amount"
-              v-model="form.amount"
-              @blur="validateField('amount')"
-              @input="validateField('amount')"
-              type="text"
-              placeholder="Введіть суму угоди"
-              @keypress="numberOnly"
-              :class="{ 'error': errors.amount }"
-          />
-          <span class="error-message" v-if="errors.amount">{{ errors.amount }}</span>
+          <div class="input-wrapper">
+            <input
+                id="amount"
+                v-model="form.amount"
+                @blur="validateField('amount')"
+                @input="validateField('amount')"
+                type="text"
+                placeholder="Введіть суму угоди"
+                @keypress="numberOnly"
+                :class="{ 'error': errors.amount }"
+            />
+            <span v-if="errors.amount" class="error-icon">
+              <img src="/iconError.svg">
+            </span>
+          </div>
         </div>
 
         <div class="form-group checkbox" :class="{ 'error': errors.terms }">
@@ -194,6 +212,8 @@ $white: white;
   }
 
   .form-group {
+    position: relative;
+    margin-bottom: 15px;
     display: flex;
     flex-direction: column;
     text-align: left;
@@ -236,6 +256,37 @@ $white: white;
       font-size: 14px;
       margin-top: 5px;
     }
+  }
+
+  .input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .input-wrapper input {
+    width: 100%;
+    padding-right: 40px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    height: 60px;
+  }
+
+  .input-wrapper input.error {
+    border-color: #dc3545;
+  }
+
+  .error-icon {
+    position: absolute;
+    right: 10px;
+    color: #dc3545;
+    font-size: 18px;
+  }
+
+  .error-message {
+    color: #dc3545;
+    font-size: 12px;
+    margin-top: 5px;
   }
 
   .checkbox {

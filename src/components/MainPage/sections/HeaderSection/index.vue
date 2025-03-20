@@ -49,6 +49,7 @@ export default defineComponent({
   width: 100%;
   background: linear-gradient(to left, #e6effe, #FFFFFF);
   background-size: 100% 100%;
+  min-height: 100vh;
 
   &__container {
     display: flex;
@@ -56,11 +57,20 @@ export default defineComponent({
     align-items: center;
     padding: 0 135px 100px;
     margin-top: 100px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+
+    @media (max-width: 1024px) {
+      padding: 0 40px 60px;
+    }
 
     @media (max-width: 768px) {
       flex-direction: column;
       gap: 50px;
-      padding: 0 20px 100px;
+      padding: 0 20px 40px;
+      margin-top: 40px;
+      min-height: calc(100vh - 70px);
     }
   }
 }
@@ -75,12 +85,20 @@ export default defineComponent({
   align-items: center;
   justify-content: center;
 
+  @media (max-width: 768px) {
+    height: 50px;
+  }
+
   &--primary {
     background-color: #217bf4;
     color: white;
     box-shadow: 0px 7px 22px -6px rgba(32, 123, 244, 0.34);
     border: none;
     width: 162px;
+
+    @media (max-width: 768px) {
+      width: 140px;
+    }
   }
 
   &--outline {
@@ -89,6 +107,10 @@ export default defineComponent({
     color: #217bf4;
     font-weight: 500;
     width: 167px;
+
+    @media (max-width: 768px) {
+      width: 140px;
+    }
   }
 
   &--small {
@@ -96,6 +118,10 @@ export default defineComponent({
     width: 123px;
     font-size: 12px;
     font-weight: 600;
+
+    @media (max-width: 768px) {
+      width: 100px;
+    }
   }
 }
 
@@ -106,11 +132,27 @@ export default defineComponent({
   height: 90px;
   padding: 22px 135px 22px;
   border-bottom: 1px solid rgba(#217BF4, .1);
+  width: 100%;
+  box-sizing: border-box;
+
+  @media (max-width: 1024px) {
+    padding: 22px 40px;
+  }
+
+  @media (max-width: 768px) {
+    padding: 15px 20px;
+    height: 70px;
+    flex-wrap: wrap;
+  }
 
   &__container {
     display: flex;
     align-items: center;
     gap: 30px;
+
+    @media (max-width: 768px) {
+      gap: 15px;
+    }
   }
 
   &__logo {
@@ -122,6 +164,11 @@ export default defineComponent({
     position: relative;
     width: 34px;
     height: 34px;
+
+    @media (max-width: 768px) {
+      width: 28px;
+      height: 28px;
+    }
   }
 
   &__logo-text {
@@ -130,6 +177,11 @@ export default defineComponent({
     color: #2b2b39;
     font-size: 24px;
     line-height: 24px;
+
+    @media (max-width: 768px) {
+      font-size: 20px;
+      line-height: 20px;
+    }
   }
 }
 </style>

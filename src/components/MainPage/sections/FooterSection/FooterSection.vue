@@ -36,7 +36,6 @@
         </div>
       </div>
     </div>
-    <Bottom />
   </footer>
 </template>
 
@@ -64,13 +63,20 @@ const socialIcons = ref([
   color: #e6e6e6;
   padding: 4rem 0 0;
 
+  @media (max-width: 768px) {
+    padding: 2rem 0 0;
+  }
+
   &__container {
     width: 100%;
     max-width: 1200px;
-    display: flex;
-    justify-content: space-between;
-    height: 220px;
     margin: 50px auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+
+    @media (max-width: 768px) {
+      margin: 30px auto;
+    }
   }
 
   &__content {
@@ -78,28 +84,53 @@ const socialIcons = ref([
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+    gap: 2rem;
+
+    @media (max-width: 1024px) {
+      gap: 3rem;
+    }
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      gap: 2rem;
+    }
   }
 
   &__navigation {
     display: flex;
     justify-content: space-between;
     gap: 2rem;
-    height: 220px;
+    flex-wrap: wrap;
+    flex: 1;
+
+    @media (max-width: 1024px) {
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 768px) {
+      gap: 3rem;
+      width: 100%;
+    }
   }
 
   &__section {
     margin-bottom: 1rem;
 
+    @media (max-width: 768px) {
+      margin-bottom: 0;
+      width: 40%;
+    }
+
     ul {
       display: flex;
       flex-direction: column;
-      justify-content: end;
       list-style: none;
       padding: 20px 0 0;
-    }
+      gap: 1.1rem;
 
-    li {
-      margin-bottom: 1.1rem;
+      @media (max-width: 768px) {
+        padding: 10px 0 0;
+      }
     }
   }
 
@@ -107,26 +138,45 @@ const socialIcons = ref([
     color: white;
     font-size: 1.25rem;
     margin-bottom: 1rem;
-    width: 150px;
+    width: 170px;
+
+    @media (max-width: 768px) {
+      width: 100%;
+      margin-bottom: 0.5rem;
+    }
   }
 
   &__link {
     color: #e6e6e6;
     text-decoration: none;
     font-size: 1rem;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: #217bf4;
+    }
   }
 
   &__subscribe {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     width: 340px;
+    gap: 1rem;
+
+    @media (max-width: 768px) {
+      width: 100%;
+    }
   }
 
   &__text {
     font-size: 1rem;
     margin-bottom: 1rem;
     width: 300px;
+
+    @media (max-width: 768px) {
+      width: 100%;
+    }
   }
 
   &__input-group {
@@ -134,27 +184,60 @@ const socialIcons = ref([
     border: 1px solid white;
     border-radius: 10px;
     overflow: hidden;
+
+    @media (max-width: 768px) {
+      gap: 1px;
+      //background: white;
+    }
   }
 
   &__input {
     flex: 1;
     border: none;
     background: transparent;
-    padding: 0.5rem;
+    padding: 0.8rem;
     color: white;
+    min-width: 0;
+
+    @media (max-width: 768px) {
+      color: #717179;
+    }
+
+    &::placeholder {
+      color: #717179;
+
+      @media (max-width: 768px) {
+        color: #717179;
+      }
+    }
   }
 
   &__button {
     background: white;
     color: #2b2b39;
-    padding: 0.5rem 1rem;
+    padding: 0.8rem 1.5rem;
     border: none;
     cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+
+    &:hover {
+      background: #217bf4;
+      color: white;
+    }
+
+    @media (max-width: 768px) {
+      padding: 0.8rem;
+    }
   }
 
   &__bottom {
     background: #20202c;
     padding: 1.5rem 0;
+
+    @media (max-width: 768px) {
+      padding: 1rem 0;
+    }
   }
 
   &__bottom-content {
@@ -163,6 +246,14 @@ const socialIcons = ref([
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 0 20px;
+    box-sizing: border-box;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      gap: 1rem;
+      text-align: center;
+    }
   }
 
   &__logo {
@@ -180,6 +271,10 @@ const socialIcons = ref([
   &__social {
     display: flex;
     gap: 0.5rem;
+
+    @media (max-width: 768px) {
+      margin-top: 1rem;
+    }
   }
 
   &__social-button {
@@ -191,6 +286,28 @@ const socialIcons = ref([
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    @media (max-width: 768px) {
+      width: 2rem;
+      height: 2rem;
+    }
+
+    img {
+      width: 2rem;
+      height: 2rem;
+      transition: all 0.3s ease;
+
+      @media (max-width: 768px) {
+        width: 1.5rem;
+        height: 1.5rem;
+      }
+
+      &:hover {
+        transform: scale(1.2);
+      }
+    }
   }
 }
 </style>

@@ -8,21 +8,22 @@
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="star-icon">
               <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
             </svg>
+            <div class="rating-title">4.8 Rating</div>
           </div>
 
-          <div class="rating-title">4.8 Rating</div>
-
-          <div class="members-container">
-            <div class="member-avatars">
-              <img class="member-avatar" alt="Member" src="/ellipse-13.svg" />
-              <img class="member-avatar" alt="Member" src="/ellipse-14-1.svg" />
-              <img class="member-avatar" alt="Member" src="/ellipse-15.svg" />
+          <div class="members-block">
+            <div class="members-container">
+              <div class="member-avatars">
+                <img class="member-avatar" alt="Member" src="/ellipse-13.svg" />
+                <img class="member-avatar" alt="Member" src="/ellipse-14-1.svg" />
+                <img class="member-avatar" alt="Member" src="/ellipse-15.svg" />
+              </div>
             </div>
-          </div>
 
-          <div class="members-count">
-            <span class="members-count-highlight">+836k</span>
-            <span class="members-count-text">Members</span>
+            <div class="members-count">
+              <span class="members-count-highlight">+836k</span>
+              <span class="members-count-text">Members</span>
+            </div>
           </div>
 
           <div class="card-description">
@@ -45,16 +46,16 @@
         <div class="card-content">
           <div class="icon-container">
             <img class="trophy-icon" alt="Trophy" src="/trophy.png" />
+            <div class="awards-title">Awwwards</div>
           </div>
 
-          <div class="awards-title">Awwwards</div>
-
-          <img class="award-icon" alt="Ellipse" src="/ellipse-14.png" />
-
-          <div class="award-text">
-            <span class="award-text-normal">Best of </span>
-            <span class="award-text-highlight">2021</span>
-            <span class="award-text-normal"> on Github</span>
+          <div class="award-block">
+            <img class="award-icon" alt="Ellipse" src="/ellipse-14.png" />
+            <div class="award-text">
+              <span class="award-text-normal">Best of </span>
+              <span class="award-text-highlight">2021</span>
+              <span class="award-text-normal"> on Github</span>
+            </div>
           </div>
 
           <div class="card-description">
@@ -73,30 +74,29 @@
       </div>
 
       <!-- Achievement Text Section -->
-      <div class="achievement-text">
-        <div class="achievement-subtitle">Our Achievement</div>
-
-        <h2 class="achievement-title">
-          We are Connecting You The Digital Life.
-        </h2>
+      <section class="achievement-text">
+        <header class="achievement-header">
+          <p class="achievement-subtitle">Our Achievement</p>
+          <h2 class="achievement-title">
+            We are Connecting You The Digital Life.
+          </h2>
+        </header>
 
         <p class="achievement-description">
-          The scope the Social Media becomes crucial Is helps the business to
-          directly engage with their needs and wants.
+          The scope the Social Media becomes crucial Is helps the business to directly engage with their needs and wants.
         </p>
 
         <div class="discover-button-container">
-          <div class="discover-button-wrapper">
-            <button class="discover-button">
-              Discover me
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="arrow-icon">
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-                <polyline points="12 5 19 12 12 19"></polyline>
-              </svg>
-            </button>
-          </div>
+          <a href="#" class="discover-button">
+            <span>Discover me</span>
+            <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
         </div>
-      </div>
+      </section>
+
     </div>
   </section>
 </template>
@@ -115,14 +115,33 @@ export default {
   display: flex;
   justify-content: center;
 
+  @media (max-width: 1024px) {
+    padding: 3rem 0;
+  }
+
+  @media (max-width: 768px) {
+    padding: 2rem 0;
+  }
+
   .container {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    align-items: center;
-    max-width: 80rem;
+    max-width: 95rem;
     margin: 0 auto;
     gap: 30px;
+    padding: 0 20px;
+    box-sizing: border-box;
+    align-items: stretch;
+
+    @media (max-width: 1024px) {
+      justify-content: center;
+      gap: 40px;
+    }
+
+    @media (max-width: 768px) {
+      gap: 30px;
+    }
   }
 
   .card {
@@ -133,33 +152,46 @@ export default {
     overflow: hidden;
     background-color: #fff;
     box-shadow: 0px 26px 49px rgba(146, 165, 183, 0.14);
+    transition: transform 0.3s ease;
+
+    @media (max-width: 768px) {
+      width: 100%;
+      max-width: 336px;
+      height: auto;
+      min-height: 360px;
+    }
+
+    &:hover {
+      transform: translateY(-5px);
+    }
 
     &.rating-card {
       .star-icon {
         color: #217bf4;
         width: 24px;
         height: 24px;
+        margin-right: 10px;
       }
     }
 
     .card-content {
       position: relative;
       height: 100%;
-      padding: 0;
+      padding: 42px 44px;
+      box-sizing: border-box;
+
+      @media (max-width: 768px) {
+        padding: 30px 20px;
+      }
     }
 
     .icon-container {
-      position: absolute;
-      width: 28px;
-      height: 28px;
-      top: 42px;
-      left: 44px;
+      display: flex;
+      margin-bottom: 40px;
+      align-items: center;
     }
 
     .rating-title, .awards-title {
-      position: absolute;
-      top: 46px;
-      left: 82px;
       font-weight: 500;
       color: #0a093d;
       font-size: 20px;
@@ -168,17 +200,20 @@ export default {
       white-space: nowrap;
     }
 
+    .members-block, .award-block {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
     .members-container {
-      position: absolute;
-      width: 60px;
-      height: 24px;
-      top: 102px;
-      left: 44px;
+      margin-bottom: 20px;
     }
 
     .member-avatars {
       position: relative;
       height: 24px;
+      width: 60px;
     }
 
     .member-avatar {
@@ -188,33 +223,21 @@ export default {
       top: 0;
       object-fit: cover;
 
-      &:nth-child(1) {
-        left: 0;
-      }
-
-      &:nth-child(2) {
-        left: 18px;
-      }
-
-      &:nth-child(3) {
-        left: 36px;
-      }
+      &:nth-child(1) { left: 0; }
+      &:nth-child(2) { left: 18px; }
+      &:nth-child(3) { left: 36px; }
     }
 
     .members-count {
-      position: absolute;
-      top: 105px;
-      left: 120px;
-      font-weight: normal;
+      margin-bottom: 20px;
       font-size: 16px;
       line-height: 18px;
-      white-space: nowrap;
 
       &-highlight {
         font-weight: 600;
         color: #217bf4;
         letter-spacing: 0;
-        margin: 0 5px;
+        margin-right: 5px;
       }
 
       &-text {
@@ -225,31 +248,22 @@ export default {
     }
 
     .trophy-icon {
-      position: absolute;
       width: 27px;
       height: 21px;
-      top: 4px;
-      left: 1px;
+      margin-right: 10px;
     }
 
     .award-icon {
-      position: absolute;
       width: 24px;
       height: 24px;
-      top: 105px;
-      left: 44px;
-      object-fit: cover;
+      margin-bottom: 20px;
     }
 
     .award-text {
-      position: absolute;
-      top: 108px;
-      left: 84px;
-      font-weight: normal;
+      margin-bottom: 20px;
       font-size: 16px;
       letter-spacing: 0;
       line-height: 18px;
-      white-space: nowrap;
 
       &-normal {
         color: #5c5a6f;
@@ -262,32 +276,31 @@ export default {
     }
 
     .card-description {
-      position: absolute;
-      width: 274px;
-      top: 166px;
-      left: 44px;
       font-weight: normal;
       color: #8c8c8c;
       font-size: 16px;
       letter-spacing: 0;
       line-height: 26px;
+      margin-bottom: 30px;
     }
 
     .link-button {
-      position: absolute;
-      top: 284px;
-      left: 44px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
       font-weight: 500;
       font-size: 16px;
       letter-spacing: 0;
       line-height: 16px;
-      padding: 0;
-      height: auto;
       background: none;
       border: none;
       cursor: pointer;
-      display: flex;
-      align-items: center;
+      padding: 0;
+      transition: opacity 0.3s ease;
+
+      &:hover {
+        opacity: 0.8;
+      }
 
       &.primary {
         color: #217bf4;
@@ -296,94 +309,117 @@ export default {
       &.secondary {
         color: #494956;
       }
-
-      .arrow-icon {
-        margin-left: 8px;
-      }
     }
   }
 
   .achievement-text {
     width: 387px;
-    height: 322px;
+    height: auto;
     position: relative;
-    margin-left: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    @media (max-width: 1024px) {
+      width: 100%;
+      max-width: 500px;
+      text-align: center;
+      margin-top: 20px;
+    }
 
     .achievement-subtitle {
-      position: absolute;
-      top: 0;
-      left: 0;
       font-weight: 500;
       color: #217bf4;
       font-size: 18px;
       letter-spacing: 0;
       line-height: 18px;
-      white-space: nowrap;
+      margin-bottom: 20px;
     }
 
     .achievement-title {
-      position: absolute;
-      width: 381px;
-      top: 28px;
-      left: 0;
       font-weight: 700;
       color: #0a093d;
       font-size: 36px;
       letter-spacing: 0;
       line-height: 48px;
-      margin: 0;
+      margin-bottom: 20px;
+
+      @media (max-width: 768px) {
+        font-size: 28px;
+        line-height: 38px;
+      }
     }
 
     .achievement-description {
-      position: absolute;
-      width: 365px;
-      top: 142px;
-      left: 0;
       font-weight: normal;
       color: #656464;
       font-size: 16px;
       letter-spacing: 0;
       line-height: 28px;
-      margin: 0;
+      margin-bottom: 30px;
+
+      @media (max-width: 768px) {
+        font-size: 14px;
+        line-height: 24px;
+      }
     }
 
     .discover-button-container {
-      position: absolute;
-      width: 194px;
-      height: 58px;
-      top: 264px;
-      left: 0;
+      @media (max-width: 1024px) {
+        display: flex;
+        justify-content: center;
+      }
     }
 
     .discover-button-wrapper {
       position: relative;
       width: 224px;
       height: 90px;
-      top: -6px;
-      left: -16px;
-      background-image: url(/rectangle-12.svg);
       background-size: 100% 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      @media (max-width: 768px) {
+        width: 180px;
+        height: 70px;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+      }
     }
 
     .discover-button {
-      position: absolute;
-      top: 28px;
-      left: 54px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-weight: 500;
       color: white;
       font-size: 14px;
       text-align: center;
       letter-spacing: -0.28px;
       line-height: 14px;
-      white-space: nowrap;
       background: none;
       border: none;
       cursor: pointer;
-      display: flex;
-      align-items: center;
+      gap: 8px;
+      transition: opacity 0.3s ease;
+      height: 60px;
+      background: #217BF4;
+      width: 224px;
+      border-radius: 14px;
+      box-shadow: 0 10px 22px -6px rgba(13, 110, 253, 0.26);
+
+      &:hover {
+        opacity: 0.8;
+      }
+
+      @media (max-width: 768px) {
+        font-size: 12px;
+      }
 
       .arrow-icon {
-        margin-left: 8px;
+        stroke: currentColor;
       }
     }
   }
