@@ -39,6 +39,7 @@
               <img src="/iconError.svg">
             </span>
           </div>
+          <span class="error-message" v-if="errors.lastName">{{ errors.lastName }}</span>
         </div>
 
         <div class="form-group" :class="{ 'error': errors.ipn }">
@@ -57,6 +58,7 @@
               <img src="/iconError.svg">
             </span>
           </div>
+          <span class="error-message" v-if="errors.ipn">{{ errors.ipn }}</span>
         </div>
 
         <div class="form-group" :class="{ 'error': errors.amount }">
@@ -76,6 +78,7 @@
               <img src="/iconError.svg">
             </span>
           </div>
+          <span class="error-message" v-if="errors.amount">{{ errors.amount }}</span>
         </div>
 
         <div class="form-group checkbox" :class="{ 'error': errors.terms }">

@@ -1,97 +1,98 @@
 <template>
-  <section class="countdown-section">
-    <div class="countdown-container">
-      <div class="content">
-        <h2 class="title">
-          Search through more than 11 million social media profiles
-        </h2>
-        <p class="description">
-          Heepsy's search filters help you find exactly what you're looking for, and our influencer reports provide you with the metrics
-        </p>
-      </div>
-      <div class="stats">
-        <div v-for="(stat, index) in stats" :key="index" class="stat-item">
-          <div class="stat-count">{{ stat.count }}</div>
-          <div class="stat-label">{{ stat.label }}</div>
-        </div>
+  <section class="statistics-section">
+    <div class="statistics-container">
+      <h2 class="statistics-heading">
+        Search through more than 11 million social media profiles
+      </h2>
+      <p class="statistics-subheading">
+        Heepsy's search filters help you find exactly what you're looking for,
+        and our influencer reports provide you with the metrics
+      </p>
+      <div class="statistics-grid">
+        <StatisticItem
+            v-for="(stat, index) in statistics"
+            :key="index"
+            :value="stat.value"
+            :label="stat.label"
+        />
       </div>
     </div>
   </section>
 </template>
 
-<script setup>
-import { ref } from 'vue';
+<script lang="ts">
+import { defineComponent } from "vue";
+import StatisticItem from "./StatisticItem.vue";
 
-const stats = ref([
-  { count: "2260", label: "Satisfied Brands" },
-  { count: "1324", label: "Satisfied Clients" },
-  { count: "3453", label: "Sponsored" },
-  { count: "9786", label: "Completed" }
-]);
+interface Statistic {
+  value: number;
+  label: string;
+}
+
+export default defineComponent({
+  name: "StatisticsSection",
+  components: {
+    StatisticItem,
+  },
+  data() {
+    return {
+      statistics: [
+        { value: 2260, label: "Satisfied Brands" },
+        { value: 1324, label: "Satisfied Clients" },
+        { value: 3453, label: "Sponsored" },
+        { value: 9786, label: "Completed" },
+      ] as Statistic[],
+    };
+  },
+});
 </script>
 
-<style lang="scss" scoped>
-.countdown-section {
-  width: 100%;
-  padding: 4rem 0;
-  background: url('/rectangle-70.svg') center/cover;
+<style scoped>
+.statistics-section {
+  padding: 80px 0;
+  color: white;
+  text-align: center;
+  background-color: #231a36;
+}
 
-  .countdown-container {
-    max-width: 64rem;
-    margin: 0 auto;
-    text-align: center;
-    padding: 5rem 1rem;
+.statistics-container {
+  max-width: 734px;
+  margin: 0 auto;
+}
 
-    .content {
-      margin-bottom: 6rem;
+.statistics-heading {
+  font-family: "Poppins", sans-serif;
+  font-size: 40px;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
 
-      .title {
-        font-family: 'Poppins', Helvetica, sans-serif;
-        font-weight: 600;
-        color: white;
-        font-size: 2.5rem;
-        line-height: 3.125rem;
-        margin-bottom: 2rem;
-      }
+.statistics-subheading {
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  color: #7b9292;
+  margin-bottom: 64px;
+}
 
-      .description {
-        font-family: 'Inter', Helvetica, sans-serif;
-        font-weight: 400;
-        color: #7b9191;
-        font-size: 1rem;
-        line-height: 1.75rem;
-        max-width: 40rem;
-        margin: 0 auto;
-      }
-    }
+.statistics-grid {
+  display: flex;
+  justify-content: space-around;
+  max-width: 1000px;
+  margin: 0 auto;
+}
 
-    .stats {
-      display: flex;
-      justify-content: center;
-      gap: 4rem;
-      flex-wrap: wrap;
+@media (max-width: 640px) {
+  .statistics-section {
+    padding: 40px 20px;
+  }
 
-      .stat-item {
-        text-align: center;
+  .statistics-heading {
+    font-size: 32px;
+  }
 
-        .stat-count {
-          font-family: 'Poppins', Helvetica, sans-serif;
-          font-weight: 600;
-          color: white;
-          font-size: 2.5rem;
-          line-height: 2.5rem;
-          margin-bottom: 0.75rem;
-        }
-
-        .stat-label {
-          font-family: 'Inter', Helvetica, sans-serif;
-          font-weight: 400;
-          color: #7b9292;
-          font-size: 0.875rem;
-          line-height: 0.875rem;
-        }
-      }
-    }
+  .statistics-grid {
+    flex-direction: column;
+    gap: 30px;
   }
 }
 </style>
