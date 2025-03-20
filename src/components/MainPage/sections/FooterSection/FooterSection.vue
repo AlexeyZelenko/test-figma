@@ -31,7 +31,7 @@
         </div>
         <div class="footer__social">
           <button v-for="(social, index) in socialIcons" :key="index" class="footer__social-button">
-            <img :src="social.icon" alt="Social Icon" />
+            <img :src="`/test-figma/${social.icon}`" alt="Social Icon" />
           </button>
         </div>
       </div>
