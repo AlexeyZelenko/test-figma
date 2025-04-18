@@ -104,6 +104,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@use "sass:color";
+
 .register {
   min-height: 100vh;
   display: flex;
@@ -185,7 +187,8 @@ export default {
   transition: background-color 0.3s;
 
   &:hover {
-    background: darken(#6ea2e6, 10%);
+    background: color.adjust(#6ea2e6, $lightness: -10%);
+    color: white;
   }
 
   &:disabled {
@@ -201,7 +204,7 @@ export default {
   transition: color 0.3s;
 
   &:hover {
-    color: darken(#6ea2e6, 10%);
+    color: color.adjust(#6ea2e6, $lightness: -10%);
   }
 }
 

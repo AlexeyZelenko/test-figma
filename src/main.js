@@ -2,9 +2,19 @@ import { createApp } from 'vue';
 import App from './App.vue';
 import { createRouter, createWebHistory } from 'vue-router';
 import store from './store/auth';
-import './assets/styles/reset.scss';
 import 'primeicons/primeicons.css';
 import PrimeVue from 'primevue/config';
+import Aura from '@primeuix/themes/aura';
+
+// Import PrimeVue components
+import InputText from 'primevue/inputtext';
+import Textarea from 'primevue/textarea';
+import Button from 'primevue/button';
+import DataTable from 'primevue/datatable';
+import Column from 'primevue/column';
+import Rating from 'primevue/rating';
+import Toast from 'primevue/toast';
+import ToastService from 'primevue/toastservice';
 
 // Import views
 import HomeView from './views/HomeView.vue';
@@ -41,5 +51,21 @@ const router = createRouter({
 const app = createApp(App);
 app.use(router);
 app.use(store);
-app.use(PrimeVue);
+app.use(PrimeVue, {
+  theme: {
+      preset: Aura
+  }
+});
+
+app.use(ToastService);
+
+// Register PrimeVue components
+app.component('InputText', InputText);
+app.component('Textarea', Textarea);
+app.component('Button', Button);
+app.component('DataTable', DataTable);
+app.component('Column', Column);
+app.component('Rating', Rating);
+app.component('Toast', Toast);
+
 app.mount('#app');

@@ -168,6 +168,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@use "sass:color";
+
 .reviews {
   padding: 80px 0;
   background-color: #f8f9fa;
@@ -296,8 +298,9 @@ export default {
   cursor: pointer;
   transition: background-color 0.3s;
 
-  &:hover:not(:disabled) {
-    background: darken(#6ea2e6, 10%);
+  &:hover {
+    background: color.adjust(#6ea2e6, $lightness: -10%);
+    color: white;
   }
 
   &:disabled {

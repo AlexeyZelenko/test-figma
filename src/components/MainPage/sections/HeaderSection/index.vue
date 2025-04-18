@@ -62,6 +62,8 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
+@use "sass:color";
+
 .header {
   position: relative;
   width: 100%;  
@@ -139,7 +141,7 @@ export default defineComponent({
       transition: background-color 0.3s;
 
       &:hover {
-        background-color: darken(#6ea2e6, 10%);
+        background-color: color.adjust(#6ea2e6, $lightness: -10%);
         color: white;
       }
 
