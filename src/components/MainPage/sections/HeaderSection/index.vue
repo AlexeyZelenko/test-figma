@@ -1,21 +1,39 @@
 <template>
   <header class="header">
-    <!-- Navigation bar -->
+    <div class="header__top">
+      <div class="navbar__logo">
+        <div class="navbar__logo-icon">
+          <img
+              class="navbar__logo-subtract-1"
+              alt="Логотип"
+              src="/images/logo.png"
+          />
+        </div>          
+      </div>
+      <div class="header__contacts">
+        <a href="mailto:mn.ck.ua@gmail.com" class="header__contact-item">
+          <i class="fas fa-envelope"></i>
+          mn.ck.ua@gmail.com
+        </a>
+        <a href="tel:+380634735500" class="header__contact-item">
+          <i class="fas fa-phone"></i>
+          +38 063 473 55 00
+        </a>
+        <a href="tel:+380674735500" class="header__contact-item">
+          <i class="fas fa-phone"></i>
+          +38 067 473 55 00
+        </a>
+        <router-link to="/register" class="header__contact-item register-button">
+          <i class="fas fa-user-plus"></i>
+          Реєстрація
+        </router-link>
+      </div>
+    </div>
+
     <nav class="navbar">
       <div class="navbar__container">
-        <div class="navbar__logo">
-          <div class="navbar__logo-icon">
-            <img
-                class="navbar__logo-subtract-1"
-                alt="Subtract"
-                src="/logo.svg"
-            />
-          </div>
-          <span class="navbar__logo-text">Netbook</span>
-        </div>
         <NavbarMenu />
       </div>
-      <NavbarActions />
     </nav>
 
     <div class="header__container">
@@ -27,9 +45,9 @@
 
 <script>
 import { defineComponent } from 'vue';
+import { RouterLink } from 'vue-router';
 import Illustration from './Illustration.vue';
 import ContentSection from './ContentSection.vue';
-import NavbarActions from './NavbarActions.vue';
 import NavbarMenu from './NavbarMenu.vue';
 
 export default defineComponent({
@@ -37,8 +55,8 @@ export default defineComponent({
   components: {
     Illustration,
     ContentSection,
-    NavbarActions,
-    NavbarMenu
+    NavbarMenu,
+    RouterLink
   }
 });
 </script>
@@ -46,38 +64,118 @@ export default defineComponent({
 <style lang="scss">
 .header {
   position: relative;
-  width: 100%;
-  background: linear-gradient(to left, #e6effe, #FFFFFF);
-  background-size: 100% 100%;
+  width: 100%;  
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  
+    
+  &__top {
+    padding: 15px 235px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    border-bottom: 1px solid #e5e5e5;
+    background-image: url(/images/top_background.png);
+    background-repeat: repeat-x;
+    background-position: bottom;
+
+    @media (max-width: 1024px) {
+      padding: 15px 40px;
+    }
+
+    @media (max-width: 768px) {
+      padding: 10px 20px;
+      flex-direction: column;
+      gap: 15px;
+    }
+  }
+
+  &__contacts {
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    gap: 20px;
+    align-items: end;   
+
+    @media (max-width: 1024px) {
+      gap: 15px;
+    }
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+
+  &__contact-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #048;
+    list-style-type: none;  
+    font-family: "Noto Sans", sans-serif;
+    font-weight: 700;
+    transition: color 0.3s;
+    font-size: 14px;
+    line-height: 1.42857143;
+    text-decoration: none;
+
+    &:hover {
+      color: #217bf4;
+    }
+
+    i {
+      font-size: 16px;
+      color: #217bf4;
+    }
+
+    &.register-button {
+      background-color: #6ea2e6;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 8px;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: darken(#6ea2e6, 10%);
+        color: white;
+      }
+
+      i {
+        color: white;
+      }
+    }
+  }
 
   &__container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 135px 100px;
-    margin-top: 100px;
+    padding: 0 135px;    
+    margin: 50px 0;
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
+    flex: 1;
 
     @media (max-width: 1024px) {
-      padding: 0 40px 60px;
+      padding: 0 40px;
     }
 
     @media (max-width: 768px) {
       flex-direction: column;
       gap: 50px;
-      padding: 0 20px 40px;
-      margin-top: 40px;
-      min-height: calc(100vh - 70px);
+      padding: 0 20px;
+      margin-top: 30px;
     }
   }
 }
 
 .button {
   cursor: pointer;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 400;
   border-radius: 14px;
   height: 62px;
@@ -128,30 +226,35 @@ export default defineComponent({
 .navbar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  height: 90px;
-  padding: 22px 135px 22px;
-  border-bottom: 1px solid rgba(#217BF4, .1);
+  justify-content: center;
+  padding: 0 135px;
+  background-color: #6ea2e6;
   width: 100%;
   box-sizing: border-box;
+  height: 50px;
 
   @media (max-width: 1024px) {
-    padding: 22px 40px;
+    padding: 0 40px;
   }
 
   @media (max-width: 768px) {
-    padding: 15px 20px;
-    height: 70px;
-    flex-wrap: wrap;
+    padding: 0 20px;
+    height: auto;
   }
 
   &__container {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 30px;
+    width: 100%;
+    max-width: 1200px;
+    height: 100%;    
 
     @media (max-width: 768px) {
       gap: 15px;
+      flex-direction: column;
+      padding: 15px 0;
     }
   }
 
@@ -162,25 +265,16 @@ export default defineComponent({
 
   &__logo-icon {
     position: relative;
-    width: 34px;
-    height: 34px;
+    width: 400px;
+    height: auto;
 
-    @media (max-width: 768px) {
-      width: 28px;
-      height: 28px;
+    img {
+      width: 100%;
+      height: auto;
     }
-  }
-
-  &__logo-text {
-    margin-left: 10px;
-    font-weight: 600;
-    color: #2b2b39;
-    font-size: 24px;
-    line-height: 24px;
 
     @media (max-width: 768px) {
-      font-size: 20px;
-      line-height: 20px;
+      width: 200px;
     }
   }
 }

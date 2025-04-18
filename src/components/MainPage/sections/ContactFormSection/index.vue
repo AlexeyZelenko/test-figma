@@ -194,6 +194,11 @@ $white: white;
 .contact-form {
   padding: 40px 20px;
   text-align: center;
+  background-image: url(/images/slide-three.jpg);
+  background-size: cover;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  background-color: #fff;
 
   h2 {
     @include font-style(700, 24px);

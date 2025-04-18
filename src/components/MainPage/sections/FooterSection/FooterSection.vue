@@ -7,13 +7,24 @@
             <h3 class="footer__title">{{ section.title }}</h3>
             <ul>
               <li v-for="(link, linkIndex) in section.links" :key="linkIndex">
-                <a href="#" class="footer__link">{{ link }}</a>
+                <i :class="link.icon" style="font-size: 1rem; color: #4f4b4b"></i>
+                <span class="footer__link">{{ link.title }}</span>                
               </li>
             </ul>
           </div>
         </div>
+        <div>
+          <div class="footer__navigation">
+            <a href="https://maps.app.goo.gl/W8ZcvN74tryqwtKS7" target="_blank">
+            <div v-for="(section, index) in footerNavigation" :key="index" class="footer__section">
+              <h3 class="footer__title text-transform-uppercase">КАРТА ПРОЇЗДУ</h3>
+              <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d10383.326234943557!2d32.025509!3d49.412091!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40d14bf9bf9fa979%3A0x39bd8294c48077a0!2sSmilyans&#39;ka%20St%2C%2044%2C%20Cherkasy%2C%20Cherkas&#39;ka%20oblast%2C%20Ukraine%2C%2018000!5e0!3m2!1sen!2sus!4v1744983821423!5m2!1sen!2sus" width="350" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+          </a>
+        </div>
+        </div>
         <div class="footer__subscribe">
-          <h3 class="footer__title">Subscribe Cirkle Newsletter</h3>
+          <h3 class="footer__title">ЗВОРОТНІЙ ЗВ'ЯЗОК</h3>
           <p class="footer__text">Subscribe to be the first one to know about updates. Enter your email</p>
           <div class="footer__input-group">
             <input type="email" placeholder="Email Address" class="footer__input" />
@@ -41,12 +52,32 @@
 
 <script setup>
 import { ref } from 'vue';
+import 'primeicons/primeicons.css'
+
 
 const footerNavigation = ref([
-  { title: "Home", links: ["Home", "Community", "Events", "Contact"] },
-  { title: "Resources", links: ["Blog", "News", "Guides", "Help Center"] },
-  { title: "Community", links: ["NewsFeed", "Profile", "Friends", "Forums"] },
-  { title: "Main links", links: ["Members", "Activity", "Groups", "Private Group"] }
+  { title: "КОНТАКТИ", links: [
+    {
+      title: "mn.ck.ua@gmail.com",
+      icon: "pi pi-envelope"
+    },
+    {
+      title: "+38 063 473 55 00",
+      icon: "pi pi-phone"
+    },
+    {
+      title: "+38 067 473 55 00",
+      icon: "pi pi-phone"
+    },
+    {
+      title: "+38 050 473 55 00",
+      icon: "pi pi-phone"
+    },
+    {
+      title: "+38 0472 50 50 45",
+      icon: "pi pi-phone"
+    }
+  ] }  
 ]);
 
 const socialIcons = ref([
@@ -62,6 +93,13 @@ const socialIcons = ref([
   background: #2b2b39;
   color: #e6e6e6;
   padding: 4rem 0 0;
+
+  background-image: url(/images/background-outer-wrapper.png);
+  background-size: cover;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  background-color: #fff;
+
 
   @media (max-width: 768px) {
     padding: 2rem 0 0;
@@ -114,11 +152,12 @@ const socialIcons = ref([
   }
 
   &__section {
+    width: 100%;
     margin-bottom: 1rem;
 
     @media (max-width: 768px) {
       margin-bottom: 0;
-      width: 40%;
+      width: 100%;
     }
 
     ul {
@@ -135,10 +174,17 @@ const socialIcons = ref([
   }
 
   &__title {
-    color: white;
+    color: #048;
     font-size: 1.25rem;
     margin-bottom: 1rem;
-    width: 170px;
+    
+    &:after {
+        content: "";
+        display: block;
+        width: 100%;
+        border-top: 1px solid #FFAA00;
+        margin: 10px 0px;
+    }
 
     @media (max-width: 768px) {
       width: 100%;
@@ -147,10 +193,12 @@ const socialIcons = ref([
   }
 
   &__link {
-    color: #e6e6e6;
+    color: #4f4b4b;
     text-decoration: none;
     font-size: 1rem;
     transition: color 0.3s ease;
+    font-weight: 500;    
+    margin-left: 10px;
 
     &:hover {
       color: #217bf4;
@@ -172,7 +220,7 @@ const socialIcons = ref([
   &__text {
     font-size: 1rem;
     margin-bottom: 1rem;
-    width: 300px;
+    width: 340px;
 
     @media (max-width: 768px) {
       width: 100%;

@@ -8,6 +8,12 @@
   </div>
 </template>
 
+<script>
+export default {
+  name: 'Illustration'
+}
+</script>
+
 <style lang="scss" scoped>
 .illustration {
   position: relative;

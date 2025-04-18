@@ -1,120 +1,71 @@
-<script setup lang="ts">
-import { ref } from 'vue';
-
-const isMenuOpen = ref(false);
+<script>
+export default {
+  name: 'NavbarMenu'
+}
 </script>
 
 <template>
-  <div class="menu-container">
-    <button class="menu-toggle" @click="isMenuOpen = !isMenuOpen">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-
-    <div class="menu" :class="{ 'menu--open': isMenuOpen }">
-      <span class="menu-item menu-item--active">Home</span>
-      <div class="menu-item menu-item--with-dropdown">
-        <span>Community</span>
-        <img
-            class="menu-dropdown-icon"
-            alt="Vector"
-            src="/vector-17.svg"
-        />
-      </div>
-      <span class="menu-item">Blog</span>
-      <span class="menu-item">Events</span>
-    </div>
-  </div>
+  <nav class="nav-menu">
+    <router-link to="/" class="nav-menu__item" active-class="nav-menu__item--active">
+      Головна
+    </router-link>
+    <router-link to="/about" class="nav-menu__item" active-class="nav-menu__item--active">
+      Про Нас
+    </router-link>
+    <router-link to="/properties" class="nav-menu__item" active-class="nav-menu__item--active">
+      Об'єкти на продаж
+    </router-link>
+    <router-link to="/contacts" class="nav-menu__item" active-class="nav-menu__item--active">
+      Контакти
+    </router-link>
+    <router-link to="/reviews" class="nav-menu__item" active-class="nav-menu__item--active">
+      Відгуки
+    </router-link>
+  </nav>
 </template>
 
-<style scoped lang="scss">
-.menu-container {
-  @media (max-width: 768px) {
-    order: 3;
-    width: 100%;
-  }
-}
-
-.menu-toggle {
-  display: none;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 30px;
-  height: 20px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-
-  @media (max-width: 768px) {
-    display: flex;
-  }
-
-  span {
-    width: 100%;
-    height: 2px;
-    background-color: #2b2b39;
-    transition: all 0.3s ease;
-  }
-}
-
-.menu {
+<style lang="scss" scoped>
+.nav-menu {
   display: flex;
+  gap: 40px;
   align-items: center;
-  gap: 30px;
-  margin-left: 50px;
-
-  @media (max-width: 1024px) {
-    margin-left: 20px;
-    gap: 20px;
-  }
 
   @media (max-width: 768px) {
-    display: none;
     flex-direction: column;
-    position: absolute;
-    top: 70px;
-    left: 0;
+    gap: 20px;
     width: 100%;
-    background: white;
-    padding: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-    margin-left: 0;
-
-    &--open {
-      display: flex;
-    }
   }
 
-  &-item {
+  &__item {
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
     font-weight: 500;
-    color: #656464;
-    font-size: 14px;
-    letter-spacing: 0.14px;
-    line-height: 14px;
+    font-family: "Noto Sans", sans-serif;
+    transition: color 0.3s;
+    padding: 5px 0;
+    position: relative;
     cursor: pointer;
 
-    @media (max-width: 768px) {
-      padding: 10px 0;
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: #fff;
+      transition: width 0.3s;
     }
 
+    &:hover,
     &--active {
-      font-weight: 600;
-      color: #2b2b39;
-    }
+      color: #fff;
 
-    &--with-dropdown {
-      display: flex;
-      align-items: center;
+      &::after {
+        width: 100%;
+      }
     }
-  }
-
-  &-dropdown-icon {
-    margin-left: 8px;
-    width: 7px;
-    height: 4px;
   }
 }
 </style>
