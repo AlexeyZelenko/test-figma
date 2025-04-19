@@ -115,7 +115,6 @@
         </button>
       </form>
     </div>
-
     <Toast />
   </section>
 </template>
@@ -284,7 +283,7 @@ $white: white;
     color: $dark-text;
     margin-bottom: 20px;
     color: rgb(26, 25, 25);
-    text-align: center;    
+    text-align: center;
   }
 
   .container {

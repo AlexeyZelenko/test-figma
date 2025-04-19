@@ -2,7 +2,10 @@
   <section class="parallax">
     <div class="parallax__container">
       <div class="parallax__content">
-        
+        <h2 class="parallax__title">Знайдіть свій ідеальний дім у Черкасах!</h2>
+        <p class="parallax__text">
+          Ми допоможемо вам перетворити мрії про власне житло на реальність. Широкий вибір квартир, будинків та земельних ділянок у найкращих районах міста.
+        </p>
       </div>
     </div>
   </section>
@@ -34,6 +37,21 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@mixin font-style($weight, $size) {
+  font-family: 'Noto Sans', sans-serif;
+  font-weight: $weight;
+  font-size: $size;
+}
+
+// Variables (keep these)
+$text-color: #0f0f0f;
+$border-color: #CCCCCC;
+$dark-text: #333333;
+$white: white;
+$primary-color: #217bf4;
+$error-color: #EB5757;
+$white: white;
+
 .parallax {
   position: relative;
   height: 500px;
@@ -99,10 +117,23 @@ export default {
   }
 
   &__text {
-    color: white;
-    font-size: 20px;
+    @include font-style(400, 1.2rem); /* Example using mixin */
+    color: $white;
+    max-width: 980px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9); /* Add text shadow for better visibility */
+    margin-top: 300px;
+    font-size: 36px;
     line-height: 1.5;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+
+    @media (max-width: 1024px) {
+      font-size: 24px;
+    }
+
+    @media (max-width: 768px) {
+      font-size: 18px;
+      margin-top: 500px;
+    }
   }
 }
 

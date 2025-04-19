@@ -6,21 +6,18 @@ export default {
 
 <template>
   <nav class="nav-menu">
-    <router-link to="/" class="nav-menu__item" active-class="nav-menu__item--active">
+    <!-- <router-link to="/" class="nav-menu__item" active-class="nav-menu__item--active">
       Головна
     </router-link>
     <router-link to="/about" class="nav-menu__item" active-class="nav-menu__item--active">
       Про Нас
-    </router-link>
-    <router-link to="/properties" class="nav-menu__item" active-class="nav-menu__item--active">
-      Об'єкти на продаж
-    </router-link>
+    </router-link>    
     <router-link to="/contacts" class="nav-menu__item" active-class="nav-menu__item--active">
       Контакти
     </router-link>
     <router-link to="/reviews" class="nav-menu__item" active-class="nav-menu__item--active">
       Відгуки
-    </router-link>
+    </router-link> -->
   </nav>
 </template>
 

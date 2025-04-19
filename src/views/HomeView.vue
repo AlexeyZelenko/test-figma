@@ -5,7 +5,8 @@
     <CountdownSection />
     <AchievementSection />
     <ReviewsSection />
-    <ContactFormSection />
+<!--    <ContactFormSection />-->
+    <PreFooterSection />
     <FooterSection />
   </div>
 </template>
@@ -18,6 +19,7 @@ import AchievementSection from "../components/MainPage/sections/AchievementSecti
 import ReviewsSection from "../components/MainPage/sections/ReviewsSection/ReviewsSection.vue";
 import ParallaxSection from "../components/MainPage/sections/ParallaxSection/ParallaxSection.vue";
 import ContactFormSection from "../components/MainPage/sections/ContactFormSection/index.vue";
+import PreFooterSection from "../components/MainPage/sections/PreFooterSection.vue";
 import FooterSection from "../components/MainPage/sections/FooterSection/FooterSection.vue";
 
 export default defineComponent({
@@ -29,7 +31,8 @@ export default defineComponent({
     ReviewsSection,
     ParallaxSection,
     ContactFormSection,
-    FooterSection
+    FooterSection,
+    PreFooterSection
   }
 });
 </script>

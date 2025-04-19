@@ -23,9 +23,9 @@ const scrollToForm = () => {
 
 <template>
   <div class="content">
-    <div class="badge" @click="scrollToForm">
+    <!-- <div class="badge" @click="scrollToForm">
       Залиши заявку
-    </div>
+    </div> -->
 
     <h1 class="title">
       Краща нерухомість за кращими цінами

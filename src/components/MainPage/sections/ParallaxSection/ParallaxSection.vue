@@ -103,7 +103,7 @@ export default {
 
   &__text {
     color: white;
-    font-size: 20px;
+    font-size: 24px;
     line-height: 1.5;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   }

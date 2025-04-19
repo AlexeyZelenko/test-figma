@@ -2,7 +2,7 @@
   <section class="reviews">
     <div id="reviews" class="reviews__container">
       <h2 class="reviews__title">Відгуки наших клієнтів</h2>
-      
+
       <div v-if="loading" class="reviews__loading">
         <i class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>
       </div>
@@ -13,8 +13,8 @@
 
       <template v-else>
         <div class="reviews__slider">
-          <button 
-            class="slider-button slider-button--prev" 
+          <button
+            class="slider-button slider-button--prev"
             @click="prevSlide"
             :disabled="currentSlide === 0"
           >
@@ -22,10 +22,14 @@
           </button>
 
           <div class="reviews__list">
-            <div 
-              v-for="review in visibleReviews" 
+            <div
+              v-for="(review, index) in reviews"
               :key="review.id"
               class="review-card"
+              :style="{
+                transform: `translateX(${-currentSlide * cardWidth}px)`,
+                display: isVisible(index) ? 'block' : 'none'
+              }"
             >
               <div class="review-card__header">
                 <img :src="review.imageUrl" :alt="review.name" class="review-card__avatar" />
@@ -46,10 +50,10 @@
             </div>
           </div>
 
-          <button 
-            class="slider-button slider-button--next" 
+          <button
+            class="slider-button slider-button--next"
             @click="nextSlide"
-            :disabled="currentSlide >= reviews.length - slidesToShow"
+            :disabled="currentSlide >= maxSlideIndex"
           >
             <i class="pi pi-chevron-right"></i>
           </button>
@@ -57,11 +61,11 @@
 
         <div class="reviews__dots">
           <button
-            v-for="(_, index) in totalDots"
-            :key="index"
+            v-for="index in totalDots"
+            :key="index - 1"
             class="dot"
-            :class="{ 'dot--active': currentSlide >= index * slidesToShow && currentSlide < (index + 1) * slidesToShow }"
-            @click="goToSlide(index * slidesToShow)"
+            :class="{ 'dot--active': Math.floor(currentSlide / slidesToShow) === index - 1 }"
+            @click="goToSlide((index - 1) * slidesToShow)"
           ></button>
         </div>
       </template>
@@ -82,6 +86,7 @@ export default {
     const slidesToShow = ref(3);
     const loading = ref(true);
     const error = ref(null);
+    const cardWidth = ref(350); // Initial card width (adjust as needed)
 
     const loadReviews = async () => {
       try {
@@ -110,8 +115,12 @@ export default {
       });
     };
 
-    const visibleReviews = computed(() => {
-      return reviews.value.slice(currentSlide.value, currentSlide.value + slidesToShow.value);
+    const isVisible = (index) => {
+      return index >= currentSlide.value && index < currentSlide.value + slidesToShow.value;
+    };
+
+    const maxSlideIndex = computed(() => {
+      return Math.max(0, reviews.value.length - slidesToShow.value);
     });
 
     const totalDots = computed(() => {
@@ -119,49 +128,61 @@ export default {
     });
 
     const nextSlide = () => {
-      if (currentSlide.value < reviews.value.length - slidesToShow.value) {
-        currentSlide.value += slidesToShow.value;
+      if (currentSlide.value < maxSlideIndex.value) {
+        currentSlide.value = Math.min(maxSlideIndex.value, currentSlide.value + slidesToShow.value);
       }
     };
 
     const prevSlide = () => {
       if (currentSlide.value > 0) {
-        currentSlide.value -= slidesToShow.value;
+        currentSlide.value = Math.max(0, currentSlide.value - slidesToShow.value);
       }
     };
 
     const goToSlide = (index) => {
-      currentSlide.value = index;
+      currentSlide.value = Math.min(maxSlideIndex.value, Math.max(0, index));
     };
 
     onMounted(() => {
       loadReviews();
-      // Обновляем количество отображаемых слайдов при изменении размера окна
+
       const updateSlidesToShow = () => {
         if (window.innerWidth < 768) {
           slidesToShow.value = 1;
+          cardWidth.value = window.innerWidth - 40; // Adjust for padding
         } else if (window.innerWidth < 1024) {
           slidesToShow.value = 2;
+          cardWidth.value = (window.innerWidth - 60) / 2;
         } else {
           slidesToShow.value = 3;
+          cardWidth.value = (window.innerWidth - 80) / 3;
         }
+        // Reset current slide position to make sure it's valid with new slidesToShow value
+        currentSlide.value = 0;
       };
 
       updateSlidesToShow();
       window.addEventListener('resize', updateSlidesToShow);
+
+      return () => {
+        window.removeEventListener('resize', updateSlidesToShow);
+      };
     });
 
     return {
       reviews,
       currentSlide,
-      visibleReviews,
+      maxSlideIndex,
       totalDots,
       nextSlide,
       prevSlide,
       goToSlide,
       loading,
       error,
-      formatDate
+      formatDate,
+      cardWidth,
+      slidesToShow,
+      isVisible
     };
   }
 };
@@ -171,8 +192,13 @@ export default {
 @use "sass:color";
 
 .reviews {
-  padding: 80px 0;
+  min-height: 550px;
+  padding: 60px 0 40px 0;
   background-color: #f8f9fa;
+
+  @media (max-width: 768px) {
+    min-height: 450px;
+  }
 
   &__container {
     max-width: 1200px;
@@ -187,6 +213,7 @@ export default {
     text-align: center;
     margin-bottom: 40px;
     font-family: "Noto Sans", sans-serif;
+    animation: fadeIn 1s ease-out; // Added animation
   }
 
   &__loading {
@@ -215,9 +242,9 @@ export default {
 
   &__list {
     display: flex;
-    gap: 20px;
     overflow: hidden;
     flex: 1;
+    transition: transform 0.5s ease-in-out; // Added transition
   }
 
   &__dots {
@@ -225,17 +252,24 @@ export default {
     justify-content: center;
     gap: 8px;
     margin-top: 30px;
+    animation: fadeIn 1s ease-out; // Added animation
+    
+    @media (max-width: 768px) {
+      display: none; // Скрываем точки на мобильных устройствах
+    }
   }
 }
 
 .review-card {
   background: white;
+  margin: 0 5px;
   padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border-radius: 12px;  
   flex: 1;
   min-width: 0;
-  transition: transform 0.3s;
+  transition: transform 0.3s, opacity 0.3s; // Added transition
+  opacity: 0;
+  animation: slideIn 0.5s forwards ease-out;
 
   &:hover {
     transform: translateY(-5px);
@@ -253,6 +287,7 @@ export default {
     border-radius: 50%;
     object-fit: cover;
     margin-right: 16px;
+    animation: fadeIn 0.5s forwards ease-out;
   }
 
   &__info {
@@ -265,17 +300,20 @@ export default {
     font-weight: 600;
     margin: 0 0 8px;
     font-family: "Noto Sans", sans-serif;
+    animation: fadeIn 0.5s forwards ease-out;
   }
 
   &__rating {
     display: flex;
     gap: 4px;
     margin-bottom: 8px;
+    animation: fadeIn 0.5s forwards ease-out;
   }
 
   &__date {
     color: #6c757d;
     font-size: 14px;
+    animation: fadeIn 0.5s forwards ease-out;
   }
 
   &__text {
@@ -283,6 +321,7 @@ export default {
     font-size: 16px;
     line-height: 1.5;
     margin: 0;
+    animation: fadeIn 0.5s forwards ease-out;
   }
 }
 
@@ -296,7 +335,9 @@ export default {
   border: none;
   border-radius: 50%;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s, opacity 0.3s; // Added transition
+  opacity: 0.8;
+  animation: fadeIn 1s ease-out; // Added animation
 
   &:hover {
     background: color.adjust(#6ea2e6, $lightness: -10%);
@@ -332,6 +373,26 @@ export default {
   color: #ffc107;
 }
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
 @media (max-width: 1024px) {
   .reviews {
     padding: 60px 0;
@@ -348,4 +409,4 @@ export default {
     }
   }
 }
-</style> 
+</style>
