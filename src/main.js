@@ -5,6 +5,7 @@ import store from './store/auth';
 import 'primeicons/primeicons.css';
 import PrimeVue from 'primevue/config';
 import Aura from '@primeuix/themes/aura';
+import './styles/main.scss';
 
 // Import PrimeVue components
 import InputText from 'primevue/inputtext';
