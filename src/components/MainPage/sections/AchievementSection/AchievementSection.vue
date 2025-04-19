@@ -37,7 +37,7 @@ export default {
 .parallax {
   position: relative;
   height: 500px;
-  background-image: url('/test-figma/images/parallax-bg.jpg');
+  background-image: url('/images/parallax-bg.jpg');
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;

@@ -22,7 +22,6 @@
           <span class="error-message" v-if="errors.firstName">{{ errors.firstName }}</span>
         </div>
 
-
         <div class="form-group" :class="{ 'error': errors.lastName }">
           <label for="lastName">Прізвище</label>
           <div class="input-wrapper">
@@ -40,6 +39,25 @@
             </span>
           </div>
           <span class="error-message" v-if="errors.lastName">{{ errors.lastName }}</span>
+        </div>
+
+        <div class="form-group" :class="{ 'error': errors.email }">
+          <label for="email">Email</label>
+          <div class="input-wrapper">
+            <input
+                id="email"
+                v-model="form.email"
+                @blur="validateField('email')"
+                @input="validateField('email')"
+                type="email"
+                placeholder="Введіть email"
+                :class="{ 'error': errors.email }"
+            />
+            <span v-if="errors.email" class="error-icon">
+              <img src="/iconError.svg">
+            </span>
+          </div>
+          <span class="error-message" v-if="errors.email">{{ errors.email }}</span>
         </div>
 
         <div class="form-group" :class="{ 'error': errors.ipn }">
@@ -92,21 +110,42 @@
           <span class="error-message" v-if="errors.terms">{{ errors.terms }}</span>
         </div>
 
-        <button type="submit" class="submit-button">Відправити</button>
+        <button type="submit" class="submit-button" :disabled="loading">
+          {{ loading ? 'Відправлення...' : 'Відправити' }}
+        </button>
       </form>
     </div>
+
+    <Toast />
   </section>
 </template>
 
 <script>
 import * as yup from "yup";
+import { useToast } from 'primevue/usetoast';
+import { ref } from 'vue';
+import Toast from 'primevue/toast';
+import { getFunctions, httpsCallable } from 'firebase/functions';
 
 export default {
+  components: {
+    Toast
+  },
+  setup() {
+    const toast = useToast();
+    const loading = ref(false);
+
+    return {
+      toast,
+      loading
+    };
+  },
   data() {
     return {
       form: {
         firstName: "",
         lastName: "",
+        email: "",
         ipn: "",
         amount: "",
         terms: false,
@@ -125,6 +164,10 @@ export default {
             .matches(/^[А-ЯІЇЄҐа-яіїєґ''-]+$/, "Тільки кирилиця та спеціальні символи")
             .min(1, "Мінімум 1 символ")
             .max(38, "Максимум 38 символів"),
+        email: yup
+            .string()
+            .required("Поле обов'язкове до заповнення")
+            .email("Невірний формат email"),
         ipn: yup
             .string()
             .required("Поле обов'язкове до заповнення")
@@ -156,16 +199,55 @@ export default {
     },
     async onSubmit() {
       try {
+        this.loading = true;
         await this.schema.validate(this.form, { abortEarly: false });
-        alert("Форма успішно відправлена! ✅");
+
+        const functions = getFunctions();
+        const sendEmail = httpsCallable(functions, 'sendEmail');
+
+        const result = await sendEmail(this.form);
+
+        if (result.data.error) {
+          throw new Error(result.data.error);
+        }
+
+        this.toast.add({
+          severity: 'success',
+          summary: 'Успішно',
+          detail: 'Форма успішно відправлена! ✅',
+          life: 3000
+        });
+
+        this.resetForm();
         this.errors = {};
       } catch (err) {
-        this.errors = err.inner.reduce((acc, error) => {
-          acc[error.path] = error.message;
-          return acc;
-        }, {});
+        if (err.inner) {
+          this.errors = err.inner.reduce((acc, error) => {
+            acc[error.path] = error.message;
+            return acc;
+          }, {});
+        } else {
+          this.toast.add({
+            severity: 'error',
+            summary: 'Помилка',
+            detail: err.message,
+            life: 3000
+          });
+        }
+      } finally {
+        this.loading = false;
       }
     },
+    resetForm() {
+      this.form = {
+        firstName: "",
+        lastName: "",
+        email: "",
+        ipn: "",
+        amount: "",
+        terms: false
+      };
+    }
   },
 };
 </script>
@@ -232,7 +314,8 @@ $white: white;
       color: $text-color;
     }
 
-    input[type="text"] {
+    input[type="text"],
+    input[type="email"] {
       padding: 16px;
       border: 1px solid $border-color;
       border-radius: 8px;
@@ -360,6 +443,11 @@ $white: white;
     &:hover {
       opacity: .9;
       background: $primary-color;
+    }
+
+    &:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
     }
   }
 }

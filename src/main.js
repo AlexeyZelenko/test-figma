@@ -24,7 +24,7 @@ import RegisterView from './views/RegisterView.vue';
 import AdminView from './views/AdminView.vue';
 
 const router = createRouter({
-  history: createWebHistory('/test-figma/'),
+  history: createWebHistory('/'),
   routes: [
     {
       path: '/',

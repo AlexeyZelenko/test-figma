@@ -7,12 +7,16 @@
     "build": "vite build",
     "preview": "vite preview",
     "deploy": "gh-pages -d dist",
-    "test": "vitest"
+    "test": "vitest",
+    "firebase": "npm run build && firebase deploy"
   },
   "dependencies": {
     "@primeuix/themes": "^1.0.3",
     "@tailwindcss/vite": "^4.1.4",
     "firebase": "^11.6.0",
+    "firebase-admin": "^13.2.0",
+    "firebase-functions": "^6.3.2",
+    "nodemailer": "^6.10.1",
     "primeicons": "^7.0.0",
     "primevue": "^4.3.3",
     "vee-validate": "^4.12.4",

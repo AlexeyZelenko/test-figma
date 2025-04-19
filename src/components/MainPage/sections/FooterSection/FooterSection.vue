@@ -36,7 +36,7 @@
     <div class="footer__bottom">
       <div class="container footer__bottom-content">
         <button v-for="(social, index) in socialIcons" :key="index" class="footer__social-button">
-            <img :src="`/test-figma/${social.icon}`" alt="Social Icon" />
+            <img :src="`/${social.icon}`" alt="Social Icon" />
         </button>
       </div>
     </div>
@@ -74,16 +74,15 @@ const footerNavigation = ref([
 ]);
 
 const socialIcons = ref([
-  { icon: "/facebook.svg", name: "Facebook" },
-  { icon: "/Twitter.svg", name: "Twitter" },
-  { icon: "/instagram.svg", name: "Instagram" },
-  { icon: "/Linkedin.svg", name: "Linkedin" }
+  { icon: "facebook.svg", name: "Facebook" },
+  { icon: "Twitter.svg", name: "Twitter" },
+  { icon: "instagram.svg", name: "Instagram" },
+  { icon: "Linkedin.svg", name: "Linkedin" }
 ]);
 </script>
 
 <style lang="scss" scoped>
 .footer {
-  background: #2b2b39;
   color: #e6e6e6;
   padding: 4rem 0 0;
 

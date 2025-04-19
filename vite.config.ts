@@ -5,7 +5,8 @@ import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
   plugins: [vue(), vueDevTools(), tailwindcss(),],
-  base: '/test-figma/',
+  // base: '/test-figma/',
+  base: '/',
   css: {
     preprocessorOptions: {
       scss: {
