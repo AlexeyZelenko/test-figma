@@ -1,6 +1,6 @@
 <template>
   <section id="form" class="contact-form">
-    <h2>Замовити послугу</h2>
+    <h2 class="text-white">Замовити послугу</h2>
     <div class="container">
       <form @submit.prevent="onSubmit" class="form">
         <div class="form-group" :class="{ 'error': errors.firstName }">
@@ -261,15 +261,12 @@ export default {
 }
 
 // Variables
-$text-color: #666666;
+$text-color: #0f0f0f;
 $border-color: #CCCCCC;
 $dark-text: #333333;
 $white: white;
 $primary-color: #217bf4;
 $error-color: #EB5757;
-$text-color: #666666;
-$border-color: #CCCCCC;
-$dark-text: #333333;
 $white: white;
 
 // Styles
@@ -283,9 +280,11 @@ $white: white;
   background-color: #fff;
 
   h2 {
-    @include font-style(700, 24px);
+    @include font-style(700, 36px);
     color: $dark-text;
     margin-bottom: 20px;
+    color: rgb(26, 25, 25);
+    text-align: center;    
   }
 
   .container {
@@ -299,6 +298,9 @@ $white: white;
     display: flex;
     flex-direction: column;
     gap: 50px;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 10px;
   }
 
   .form-group {
@@ -310,7 +312,7 @@ $white: white;
     gap: 8px;
 
     label {
-      @include font-style(600, 12px);
+      @include font-style(600, 16px);
       color: $text-color;
     }
 

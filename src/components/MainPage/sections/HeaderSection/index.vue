@@ -156,7 +156,7 @@ export default defineComponent({
     justify-content: space-between;
     align-items: center;
     padding: 0 35px;    
-    margin: 50px 0;
+    margin: 50px 0 0 0;
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;

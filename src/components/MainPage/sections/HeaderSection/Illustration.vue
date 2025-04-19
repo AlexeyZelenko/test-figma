@@ -1,9 +1,14 @@
 <template>
   <div class="illustration">
-    <img
+    <!-- <img
         class="header__vector"
         alt="Vector"
         src="/custom_vector1.svg"
+    /> -->
+    <img
+        class="header__vector"
+        alt="Vector"
+        src="/images/figure_businessman.jpg"
     />
   </div>
 </template>
@@ -19,7 +24,7 @@ export default {
   position: relative;
   width: 100%;
   max-width: 586px;
-  height: 501px;
+  height: 701px;
   margin-left: auto;
   margin-right: 135px;
 
