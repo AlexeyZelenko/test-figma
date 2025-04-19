@@ -1,144 +1,137 @@
 <template>
-  <section class="achievements">
-    <div class="achievements__container">
-      <h2 class="achievements__title">Наші досягнення</h2>
-      <div class="achievements__grid">
-        <div class="achievement-card">
-          <div class="achievement-card__icon">
-            <i class="pi pi-home"></i>
-          </div>
-          <h3 class="achievement-card__number">1000+</h3>
-          <p class="achievement-card__text">Успішно проданих об'єктів</p>
-        </div>
-
-        <div class="achievement-card">
-          <div class="achievement-card__icon">
-            <i class="pi pi-users"></i>
-          </div>
-          <h3 class="achievement-card__number">500+</h3>
-          <p class="achievement-card__text">Задоволених клієнтів</p>
-        </div>
-
-        <div class="achievement-card">
-          <div class="achievement-card__icon">
-            <i class="pi pi-star"></i>
-          </div>
-          <h3 class="achievement-card__number">5+</h3>
-          <p class="achievement-card__text">Років на ринку</p>
-        </div>
-
-        <div class="achievement-card">
-          <div class="achievement-card__icon">
-            <i class="pi pi-map-marker"></i>
-          </div>
-          <h3 class="achievement-card__number">50+</h3>
-          <p class="achievement-card__text">Районів міста</p>
-        </div>
+  <section class="parallax">
+    <div class="parallax__container">
+      <div class="parallax__content">
+        
       </div>
     </div>
   </section>
 </template>
 
 <script>
-import { defineComponent } from 'vue';
+import { onMounted, onUnmounted } from 'vue';
 
-export default defineComponent({
-  name: 'AchievementSection'
-});
+export default {
+  name: 'ParallaxSection',
+  setup() {
+    const handleScroll = () => {
+      const content = document.querySelector('.parallax__content');
+      if (content) {
+        const scrolled = window.pageYOffset;
+        content.style.transform = `translateY(${scrolled * 0.3}px)`; // Зменшено ефект
+      }
+    };
+
+    onMounted(() => {
+      window.addEventListener('scroll', handleScroll);
+    });
+
+    onUnmounted(() => {
+      window.removeEventListener('scroll', handleScroll);
+    });
+  }
+};
 </script>
 
 <style lang="scss" scoped>
-.achievements {
-  padding: 80px 0;
-  background-color: #fff;
+.parallax {
+  position: relative;
+  height: 500px;
+  background-image: url('/test-figma/images/parallax-bg.jpg');
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+  }
 
   &__container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-  }
-
-  &__title {
-    color: #048;
-    font-size: 32px;
-    font-weight: 700;
-    text-align: center;
-    margin-bottom: 50px;
-    font-family: "Noto Sans", sans-serif;
-  }
-
-  &__grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 30px;
-
-    @media (max-width: 1024px) {
-      grid-template-columns: repeat(2, 1fr);
-    }
-
-    @media (max-width: 768px) {
-      grid-template-columns: 1fr;
-    }
-  }
-}
-
-.achievement-card {
-  background: #f8f9fa;
-  padding: 30px;
-  border-radius: 12px;
-  text-align: center;
-  transition: transform 0.3s;
-
-  &:hover {
-    transform: translateY(-5px);
-  }
-
-  &__icon {
-    width: 60px;
-    height: 60px;
-    background: #6ea2e6;
-    border-radius: 50%;
+    padding-bottom: 500px;
+    position: relative;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto 20px;
+    z-index: 2;
+    overflow: hidden; /* Додано для запобігання виходу контенту */
 
-    i {
-      font-size: 24px;
-      color: white;
+    @media (max-width: 1024px) {
+      padding-bottom: 400px;
+    }
+
+    @media (max-width: 768px) {
+      padding-bottom: 300px;
     }
   }
 
-  &__number {
-    color: #048;
-    font-size: 36px;
+  &__content {
+    max-width: 800px;
+    text-align: center;
+    padding: 0 20px 0;
+    transition: transform 0.2s ease-out; /* Додано для плавності */
+
+    @media (max-width: 1024px) {
+      padding: 0 20px 50px;
+    }
+
+    @media (max-width: 768px) {
+      padding: 0 20px 350px;
+    }
+  }
+
+  &__title {
+    color: white;
+    font-size: 42px;
     font-weight: 700;
-    margin: 0 0 10px;
+    margin-bottom: 20px;
     font-family: "Noto Sans", sans-serif;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   }
 
   &__text {
-    color: #495057;
-    font-size: 16px;
+    color: white;
+    font-size: 20px;
     line-height: 1.5;
-    margin: 0;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   }
 }
 
 @media (max-width: 1024px) {
-  .achievements {
-    padding: 60px 0;
+  .parallax {
+    height: 400px;
+
+    &__title {
+      font-size: 36px;
+    }
+
+    &__text {
+      font-size: 18px;
+    }
   }
 }
 
 @media (max-width: 768px) {
-  .achievements {
-    padding: 40px 0;
+  .parallax {
+    height: 300px;
 
     &__title {
       font-size: 28px;
-      margin-bottom: 30px;
+      margin-bottom: 15px;
+    }
+
+    &__text {
+      font-size: 16px;
     }
   }
 }
-</style> 
+</style>

@@ -1,5 +1,5 @@
 <template>
-  <section class="contact-form">
+  <section id="form" class="contact-form">
     <h2>Замовити послугу</h2>
     <div class="container">
       <form @submit.prevent="onSubmit" class="form">

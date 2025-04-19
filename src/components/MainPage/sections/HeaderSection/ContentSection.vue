@@ -1,31 +1,47 @@
-<script>
-export default {
-  name: 'ContentSection'
-}
+<script setup>
+const scrollToReviews = () => {
+  const reviewsSection = document.getElementById('reviews');
+  if (reviewsSection) {
+    reviewsSection.scrollIntoView({ behavior: 'smooth' });
+  }
+};
+
+const scrollToAboutUs = () => {
+  const aboutUsSection = document.getElementById('about-us');
+  if (aboutUsSection) {
+    aboutUsSection.scrollIntoView({ behavior: 'smooth' });
+  }
+};
+
+const scrollToForm = () => {
+  const formSection = document.getElementById('form');
+  if (formSection) {
+    formSection.scrollIntoView({ behavior: 'smooth' });
+  }
+};
 </script>
 
 <template>
   <div class="content">
-    <div class="badge">
-      Netbook community
+    <div class="badge" @click="scrollToForm">
+      Залиши заявку
     </div>
 
     <h1 class="title">
-      Your Solutions For Community!
+      Краща нерухомість за кращими цінами
     </h1>
 
     <p class="description">
-      More than 2 billion people in over countries use socibook to stay in
-      touch with friends & family.
+      Наша професія – робити ваше життя легшим. Наша мета – не залишити Вас без житла.
     </p>
 
     <div class="buttons">
-      <button class="button button--primary">
-        About More
+      <button class="button button--primary" @click="scrollToReviews">
+        ВІДГУКИ
       </button>
 
-      <button class="button button--outline">
-        Invite Friend
+      <button class="button button--outline" @click="scrollToAboutUs">
+        ПРО НАС
       </button>
     </div>
   </div>
@@ -37,7 +53,7 @@ export default {
   width: 100%;
   max-width: 519px;
   margin-left: 135px;
-  padding-top: 100px;
+  padding-top: 100px;  
 
   @media (max-width: 1024px) {
     margin-left: 0;
@@ -111,6 +127,7 @@ export default {
   font-weight: 500;
   font-size: 12px;
   display: inline-block;
+  cursor: pointer;
 
   &:hover {
     background-color: rgba(33, 123, 244, 0.2);

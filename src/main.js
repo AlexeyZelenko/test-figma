@@ -53,7 +53,10 @@ app.use(router);
 app.use(store);
 app.use(PrimeVue, {
   theme: {
-      preset: Aura
+      preset: Aura,
+      options: {
+        darkModeSelector: '.my-app-dark',
+      }
   }
 });
 

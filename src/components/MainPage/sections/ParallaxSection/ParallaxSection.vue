@@ -18,10 +18,10 @@ export default {
   name: 'ParallaxSection',
   setup() {
     const handleScroll = () => {
-      const parallax = document.querySelector('.parallax');
-      if (parallax) {
+      const content = document.querySelector('.parallax__content');
+      if (content) {
         const scrolled = window.pageYOffset;
-        parallax.style.backgroundPositionY = `${scrolled * 0.5}px`;
+        content.style.transform = `translateY(${scrolled * 0.3}px)`; // Зменшено ефект
       }
     };
 
@@ -59,18 +59,37 @@ export default {
   }
 
   &__container {
+    padding-bottom: 500px;
     position: relative;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 2;
+    overflow: hidden; /* Додано для запобігання виходу контенту */
+
+    @media (max-width: 1024px) {
+      padding-bottom: 400px;
+    }
+
+    @media (max-width: 768px) {
+      padding-bottom: 300px;
+    }
   }
 
   &__content {
     max-width: 800px;
     text-align: center;
-    padding: 0 20px;
+    padding: 0 20px 0;
+    transition: transform 0.2s ease-out; /* Додано для плавності */
+
+    @media (max-width: 1024px) {
+      padding: 0 20px 50px;
+    }
+
+    @media (max-width: 768px) {
+      padding: 0 20px 350px;
+    }
   }
 
   &__title {
@@ -118,4 +137,4 @@ export default {
     }
   }
 }
-</style> 
+</style>

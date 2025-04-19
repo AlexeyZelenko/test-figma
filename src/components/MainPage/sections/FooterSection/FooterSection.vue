@@ -35,16 +35,9 @@
     </div>
     <div class="footer__bottom">
       <div class="container footer__bottom-content">
-        <p class="footer__text">Besnik Creative Agency.</p>
-        <div class="footer__logo">
-          <img src="/logo.svg" alt="Logo" />
-          <span class="footer__logo-text">Netbook</span>
-        </div>
-        <div class="footer__social">
-          <button v-for="(social, index) in socialIcons" :key="index" class="footer__social-button">
+        <button v-for="(social, index) in socialIcons" :key="index" class="footer__social-button">
             <img :src="`/test-figma/${social.icon}`" alt="Social Icon" />
-          </button>
-        </div>
+        </button>
       </div>
     </div>
   </footer>
@@ -289,19 +282,13 @@ const socialIcons = ref([
   }
 
   &__bottom-content {
-    max-width: 1200px;
+    max-width: 400px;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 20px;
-    box-sizing: border-box;
-
-    @media (max-width: 768px) {
-      flex-direction: column;
-      gap: 1rem;
-      text-align: center;
-    }
+    box-sizing: border-box;    
   }
 
   &__logo {

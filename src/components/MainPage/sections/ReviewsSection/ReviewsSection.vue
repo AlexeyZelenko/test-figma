@@ -1,6 +1,6 @@
 <template>
   <section class="reviews">
-    <div class="reviews__container">
+    <div id="reviews" class="reviews__container">
       <h2 class="reviews__title">Відгуки наших клієнтів</h2>
       
       <div v-if="loading" class="reviews__loading">
@@ -28,7 +28,7 @@
               class="review-card"
             >
               <div class="review-card__header">
-                <img :src="review.avatar" :alt="review.name" class="review-card__avatar" />
+                <img :src="review.imageUrl" :alt="review.name" class="review-card__avatar" />
                 <div class="review-card__info">
                   <h3 class="review-card__name">{{ review.name }}</h3>
                   <div class="review-card__rating">

@@ -12,19 +12,19 @@
       </div>
       <div class="header__contacts">
         <a href="mailto:mn.ck.ua@gmail.com" class="header__contact-item">
-          <i class="fas fa-envelope"></i>
+          <i class="pi pi-envelope"></i>
           mn.ck.ua@gmail.com
         </a>
         <a href="tel:+380634735500" class="header__contact-item">
-          <i class="fas fa-phone"></i>
+          <i class="pi pi-phone"></i>
           +38 063 473 55 00
         </a>
         <a href="tel:+380674735500" class="header__contact-item">
-          <i class="fas fa-phone"></i>
+          <i class="pi pi-phone"></i>
           +38 067 473 55 00
         </a>
         <router-link to="/register" class="header__contact-item register-button">
-          <i class="fas fa-user-plus"></i>
+          <i class="pi pi-user-plus"></i>
           Реєстрація
         </router-link>
       </div>
@@ -70,7 +70,7 @@ export default defineComponent({
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  
+  background-color: #f4f6f8;
     
   &__top {
     padding: 15px 235px;
@@ -155,7 +155,7 @@ export default defineComponent({
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 135px;    
+    padding: 0 35px;    
     margin: 50px 0;
     width: 100%;
     max-width: 100%;

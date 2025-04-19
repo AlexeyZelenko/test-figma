@@ -1,12 +1,11 @@
 <template>
-  <section class="statistics-section">
+  <section id="about-us" class="statistics-section">
     <div class="statistics-container">
       <h2 class="statistics-heading">
-        Search through more than 11 million social media profiles
+        Ваш надійний партнер у сфері нерухомості
       </h2>
       <p class="statistics-subheading">
-        Heepsy's search filters help you find exactly what you're looking for,
-        and our influencer reports provide you with the metrics
+        Ми - команда досвідчених професіоналів, які допоможуть вам з кожним етапом угоди з нерухомістю.
       </p>
       <div class="statistics-grid">
         <StatisticItem
@@ -25,7 +24,7 @@ import { defineComponent } from "vue";
 import StatisticItem from "./StatisticItem.vue";
 
 interface Statistic {
-  value: number;
+  value: string;
   label: string;
 }
 
@@ -37,10 +36,10 @@ export default defineComponent({
   data() {
     return {
       statistics: [
-        { value: 2260, label: "Satisfied Brands" },
-        { value: 1324, label: "Satisfied Clients" },
-        { value: 3453, label: "Sponsored" },
-        { value: 9786, label: "Completed" },
+      { value: '+10', label: 'Років досвіду' },
+      { value: '+500', label: 'Задоволених клієнтів' },
+      { value: '+500', label: 'Укладених угод' },
+      { value: '+10', label: 'Досвідчених агентів' },
       ] as Statistic[],
     };
   },
