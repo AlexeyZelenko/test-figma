@@ -1,6 +1,7 @@
 <template>
   <div class="home">
     <HeaderSection />
+    <PrinciplesSection />
     <ParallaxSection />
     <CountdownSection />
     <AchievementSection />
@@ -21,6 +22,7 @@ import ParallaxSection from "../components/MainPage/sections/ParallaxSection/Par
 import ContactFormSection from "../components/MainPage/sections/ContactFormSection/index.vue";
 import PreFooterSection from "../components/MainPage/sections/PreFooterSection.vue";
 import FooterSection from "../components/MainPage/sections/FooterSection/FooterSection.vue";
+import PrinciplesSection from '../components/MainPage/sections/PrinciplesSection/PrinciplesSection.vue';
 
 export default defineComponent({
   name: 'HomeView',
@@ -32,7 +34,8 @@ export default defineComponent({
     ParallaxSection,
     ContactFormSection,
     FooterSection,
-    PreFooterSection
+    PreFooterSection,
+    PrinciplesSection
   }
 });
 </script>

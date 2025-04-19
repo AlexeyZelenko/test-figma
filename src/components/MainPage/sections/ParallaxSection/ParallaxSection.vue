@@ -96,9 +96,13 @@ export default {
     color: white;
     font-size: 42px;
     font-weight: 700;
-    margin-bottom: 20px;
+    margin-bottom: 520px;
     font-family: "Noto Sans", sans-serif;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+
+    @media (max-width: 1024px) {
+      margin-bottom: 1720px;
+    }
   }
 
   &__text {
@@ -129,7 +133,7 @@ export default {
 
     &__title {
       font-size: 28px;
-      margin-bottom: 15px;
+      margin-bottom: 1000px;
     }
 
     &__text {
