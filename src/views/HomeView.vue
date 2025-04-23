@@ -1,13 +1,20 @@
 <template>
   <div class="home">
     <HeaderSection />
-    <PrinciplesSection />
+    <SchemeWorkWithUs />
     <ParallaxSection />
+    <HowWeDoIt />
     <CountdownSection />
-    <AchievementSection />
+    <StepsBusinessWithUs />
+    <OurCases />
+    <Case1 />
     <ReviewsSection />
-<!--    <ContactFormSection />-->
+    <Case2 />
     <PreFooterSection />
+    <WhoWeWorkWith />
+    <AchievementSection />
+    <IndividualBonuses />
+    <WhoWeDontWorkWith />
     <FooterSection />
   </div>
 </template>
@@ -19,10 +26,17 @@ import CountdownSection from "../components/MainPage/sections/CountdownSection/C
 import AchievementSection from "../components/MainPage/sections/AchievementSection/AchievementSection.vue";
 import ReviewsSection from "../components/MainPage/sections/ReviewsSection/ReviewsSection.vue";
 import ParallaxSection from "../components/MainPage/sections/ParallaxSection/ParallaxSection.vue";
-import ContactFormSection from "../components/MainPage/sections/ContactFormSection/index.vue";
 import PreFooterSection from "../components/MainPage/sections/PreFooterSection.vue";
 import FooterSection from "../components/MainPage/sections/FooterSection/FooterSection.vue";
-import PrinciplesSection from '../components/MainPage/sections/PrinciplesSection/PrinciplesSection.vue';
+import SchemeWorkWithUs from '../components/MainPage/sections/SchemeWorkWithUs.vue';
+import HowWeDoIt from '../components/MainPage/sections/HowWeDoIt.vue';
+import StepsBusinessWithUs from '../components/MainPage/sections/StepsBusinessWithUs.vue';
+import WhoWeWorkWith from '../components/MainPage/sections/WhoWeWorkWith.vue';
+import Case1 from '../components/MainPage/sections/Case1.vue';
+import Case2 from '../components/MainPage/sections/Case2.vue';
+import IndividualBonuses from '../components/MainPage/sections/IndividualBonuses.vue';
+import WhoWeDontWorkWith from '../components/MainPage/sections/WhoWeDontWorkWith.vue';
+import OurCases from '../components/MainPage/sections/OurCases.vue';
 
 export default defineComponent({
   name: 'HomeView',
@@ -32,10 +46,17 @@ export default defineComponent({
     AchievementSection,
     ReviewsSection,
     ParallaxSection,
-    ContactFormSection,
     FooterSection,
     PreFooterSection,
-    PrinciplesSection
+    SchemeWorkWithUs,
+    HowWeDoIt,
+    StepsBusinessWithUs,
+    WhoWeWorkWith,
+    Case1,
+    Case2,
+    IndividualBonuses,
+    WhoWeDontWorkWith,
+    OurCases
   }
 });
 </script>

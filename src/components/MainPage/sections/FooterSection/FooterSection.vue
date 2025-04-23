@@ -22,24 +22,16 @@
             </div>
           </a>
         </div>
-        </div>
-        <!-- <div class="footer__subscribe">
-          <h3 class="footer__title">ЗВОРОТНІЙ ЗВ'ЯЗОК</h3>
-          <p class="footer__text">Subscribe to be the first one to know about updates. Enter your email</p>
-          <div class="footer__input-group">
-            <input type="email" placeholder="Email Address" class="footer__input" />
-            <button class="footer__button">Subscribe</button>
-          </div>
-        </div> -->
+        </div>        
       </div>
     </div>
-    <div class="footer__bottom">
+    <!-- <div class="footer__bottom">
       <div class="container footer__bottom-content">
         <button v-for="(social, index) in socialIcons" :key="index" class="footer__social-button">
             <img :src="`/${social.icon}`" alt="Social Icon" />
         </button>
       </div>
-    </div>
+    </div> -->
   </footer>
 </template>
 
@@ -61,15 +53,7 @@ const footerNavigation = ref([
     {
       title: "+38 067 473 55 00",
       icon: "pi pi-phone"
-    },
-    {
-      title: "+38 050 473 55 00",
-      icon: "pi pi-phone"
-    },
-    {
-      title: "+38 0472 50 50 45",
-      icon: "pi pi-phone"
-    }
+    }    
   ] }  
 ]);
 
