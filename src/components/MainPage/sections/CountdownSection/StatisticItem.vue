@@ -12,7 +12,7 @@ export default defineComponent({
   name: "StatisticItem",
   props: {
     value: {
-      type: Number,
+      type: [Number, String],
       required: true,
     },
     label: {

@@ -113,6 +113,8 @@ const socialIcons = ref([
   &__navigation {
     display: flex;
     justify-content: space-between;
+    max-width: 980px;
+    margin: 0 auto;
     gap: 2rem;
     flex-wrap: wrap;
     flex: 1;
@@ -171,7 +173,7 @@ const socialIcons = ref([
   &__link {
     color: #4f4b4b;
     text-decoration: none;
-    font-size: 1rem;
+    font-size: 1.5rem;
     transition: color 0.3s ease;
     font-weight: 500;    
     margin-left: 10px;
@@ -186,7 +188,7 @@ const socialIcons = ref([
     flex-direction: column;
     justify-content: flex-start;
     width: 340px;
-    gap: 1rem;
+    gap: 1.5rem;
 
     @media (max-width: 768px) {
       width: 100%;
@@ -194,7 +196,7 @@ const socialIcons = ref([
   }
 
   &__text {
-    font-size: 1rem;
+    font-size: 1.5rem;
     margin-bottom: 1rem;
     width: 340px;
 

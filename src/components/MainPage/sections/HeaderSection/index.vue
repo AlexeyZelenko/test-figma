@@ -98,7 +98,7 @@ export default defineComponent({
     display: flex;
     justify-content: flex-end;
     flex-direction: column;
-    gap: 20px;
+    gap: 10px;
     align-items: end;   
 
     @media (max-width: 1024px) {
@@ -120,7 +120,7 @@ export default defineComponent({
     font-family: "Noto Sans", sans-serif;
     font-weight: 700;
     transition: color 0.3s;
-    font-size: 14px;
+    font-size: 18px;
     line-height: 1.42857143;
     text-decoration: none;
 
