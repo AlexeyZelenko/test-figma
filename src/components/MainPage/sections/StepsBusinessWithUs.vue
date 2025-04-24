@@ -7,7 +7,7 @@ import Timeline3 from "../../Timeline3.vue";
     <img src="/images/stepsBusinessWithUs.svg" alt="Steps Business With Us" class="w-full h-auto" />
   </div>
   <div class="mobile-block">
-    <h1 class="flex justify-center font-bold text-2xl text-green-800">ЕТАПИ СПІВПРАЦІ З НАМИ</h1>
+    <h1 class="flex justify-center font-bold text-2xl text-green-800 pb-2">ЕТАПИ СПІВПРАЦІ З НАМИ</h1>
     <Timeline3 />
   </div>
 </template>
@@ -25,7 +25,7 @@ img {
 
 .mobile-block {
   display: block; /* За замовчуванням видимий на мобільних */
-  margin: 30px auto;
+  margin: 20px;
 }
 
 /* Медіа-запит для екранів середнього розміру та більше (наприклад, десктопи) */

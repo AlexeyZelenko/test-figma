@@ -4,6 +4,8 @@ import Button from "primevue/button";
 import Card from "primevue/card";
 import {ref} from "vue";
 
+import AnimateOnScroll from 'primevue/animateonscroll';
+
 const events = ref([
   { status: 'Сервіс та професіоналізм', description: 'Індивідуально підходимо до кожної проблеми клієнта. Цілком поринаємо в ситуацію і детально опрацьовуємо весь процес до його завершення', icon: 'pi pi-check', color: '#9C27B0' },
   { status: 'Персонально', description: 'Ваш персональний агент нерухомості на зв\'язку з Вами 24 години на добу 7 днів на тижден', icon: 'pi pi-check', color: '#673AB7' },
@@ -14,6 +16,7 @@ const events = ref([
 </script>
 
 <template>
+  <div class="flex flex-wrap justify-center gap-8">
   <div class="card">
     <Timeline :value="events" :align="isMobile ? 'left' : 'alternate'" class="customized-timeline">
       <template #marker="slotProps">
@@ -38,6 +41,7 @@ const events = ref([
         </Card>
       </template>
     </Timeline>
+  </div>
   </div>
 </template>
 

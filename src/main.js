@@ -16,6 +16,7 @@ import Column from 'primevue/column';
 import Rating from 'primevue/rating';
 import Toast from 'primevue/toast';
 import ToastService from 'primevue/toastservice';
+import AnimateOnScroll from 'primevue/animateonscroll';
 
 // Import views
 import HomeView from './views/HomeView.vue';
@@ -60,6 +61,7 @@ app.use(PrimeVue, {
       }
   }
 });
+app.directive('animateonscroll', AnimateOnScroll);
 
 app.use(ToastService);
 
