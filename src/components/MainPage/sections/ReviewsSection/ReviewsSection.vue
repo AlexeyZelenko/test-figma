@@ -1,10 +1,10 @@
 <template>
-  <section class="reviews">
+  <section id="reviews" class="reviews">
     <div id="reviews" class="reviews__container">
       <h2 class="reviews__title">Відгуки наших клієнтів</h2>
 
       <div v-if="loading" class="reviews__loading">
-        <i class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>
+        <i class="pi pi-spin pi-spinner" style="font-size: 3rem"></i>
       </div>
 
       <div v-else-if="error" class="reviews__error">
@@ -28,7 +28,7 @@
               class="review-card"
               :style="{
                 transform: `translateX(${-currentSlide * cardWidth}px)`,
-                display: isVisible(index) ? 'block' : 'none'
+                display: isVisible(index) ? 'flex' : 'none'
               }"
             >
               <div class="review-card__header">
@@ -47,6 +47,9 @@
                 </div>
               </div>
               <p class="review-card__text">{{ review.text }}</p>
+              <button class="review-card__details" @click="openModal(review)">
+                ДЕТАЛЬНІШЕ
+              </button>
             </div>
           </div>
 
@@ -70,122 +73,156 @@
         </div>
       </template>
     </div>
+
+    <!-- Модальне вікно -->
+    <Dialog
+      v-model:visible="modalVisible"
+      :style="{ width: '90vw', maxWidth: '500px' }"
+      :modal="true"
+      :dismissableMask="true"
+      @hide="closeModal"
+    >
+      <template #header>
+        <div class="modal-header">
+          <h3>{{ selectedReview?.name }}</h3>
+        </div>
+      </template>
+
+      <div class="modal-content">
+        <img 
+          :src="selectedReview?.imageUrl" 
+          :alt="selectedReview?.name" 
+          class="modal-avatar"
+        />
+        <div class="modal-rating">
+          <i
+            v-for="star in 5"
+            :key="star"
+            class="pi pi-star-fill"
+            :class="{ 'star-filled': star <= selectedReview?.rating }"
+          ></i>
+        </div>
+        <div class="modal-date">{{ formatDate(selectedReview?.date) }}</div>
+        <p class="modal-text">{{ selectedReview?.text }}</p>
+      </div>
+
+      <template #footer>
+        <Button 
+          label="Закрити" 
+          icon="pi pi-times" 
+          @click="closeModal" 
+          class="p-button-text"
+        />
+      </template>
+    </Dialog>
   </section>
 </template>
 
-<script>
-import { ref, onMounted, computed } from 'vue';
+<script setup>
+import { ref, computed, onMounted } from 'vue';
 import { collection, getDocs, query, orderBy } from 'firebase/firestore';
 import { db } from '../../../../firebase/config';
+import Dialog from 'primevue/dialog';
+import Button from 'primevue/button';
 
-export default {
-  name: 'ReviewsSection',
-  setup() {
-    const reviews = ref([]);
-    const currentSlide = ref(0);
-    const slidesToShow = ref(3);
-    const loading = ref(true);
-    const error = ref(null);
-    const cardWidth = ref(350); // Initial card width (adjust as needed)
+const reviews = ref([]);
+const currentSlide = ref(0);
+const slidesToShow = ref(3);
+const loading = ref(true);
+const error = ref(null);
+const cardWidth = ref(350);
+const modalVisible = ref(false);
+const selectedReview = ref(null);
 
-    const loadReviews = async () => {
-      try {
-        loading.value = true;
-        const q = query(collection(db, 'reviews'), orderBy('date', 'desc'));
-        const querySnapshot = await getDocs(q);
-        reviews.value = querySnapshot.docs.map(doc => ({
-          id: doc.id,
-          ...doc.data()
-        }));
-      } catch (err) {
-        console.error('Error loading reviews:', err);
-        error.value = 'Помилка завантаження відгуків';
-      } finally {
-        loading.value = false;
-      }
-    };
-
-    const formatDate = (dateString) => {
-      if (!dateString) return '';
-      const date = new Date(dateString);
-      return date.toLocaleDateString('uk-UA', {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric'
-      });
-    };
-
-    const isVisible = (index) => {
-      return index >= currentSlide.value && index < currentSlide.value + slidesToShow.value;
-    };
-
-    const maxSlideIndex = computed(() => {
-      return Math.max(0, reviews.value.length - slidesToShow.value);
-    });
-
-    const totalDots = computed(() => {
-      return Math.ceil(reviews.value.length / slidesToShow.value);
-    });
-
-    const nextSlide = () => {
-      if (currentSlide.value < maxSlideIndex.value) {
-        currentSlide.value = Math.min(maxSlideIndex.value, currentSlide.value + slidesToShow.value);
-      }
-    };
-
-    const prevSlide = () => {
-      if (currentSlide.value > 0) {
-        currentSlide.value = Math.max(0, currentSlide.value - slidesToShow.value);
-      }
-    };
-
-    const goToSlide = (index) => {
-      currentSlide.value = Math.min(maxSlideIndex.value, Math.max(0, index));
-    };
-
-    onMounted(() => {
-      loadReviews();
-
-      const updateSlidesToShow = () => {
-        if (window.innerWidth < 768) {
-          slidesToShow.value = 1;
-          cardWidth.value = window.innerWidth - 40; // Adjust for padding
-        } else if (window.innerWidth < 1024) {
-          slidesToShow.value = 2;
-          cardWidth.value = (window.innerWidth - 60) / 2;
-        } else {
-          slidesToShow.value = 3;
-          cardWidth.value = (window.innerWidth - 80) / 3;
-        }
-        // Reset current slide position to make sure it's valid with new slidesToShow value
-        currentSlide.value = 0;
-      };
-
-      updateSlidesToShow();
-      window.addEventListener('resize', updateSlidesToShow);
-
-      return () => {
-        window.removeEventListener('resize', updateSlidesToShow);
-      };
-    });
-
-    return {
-      reviews,
-      currentSlide,
-      maxSlideIndex,
-      totalDots,
-      nextSlide,
-      prevSlide,
-      goToSlide,
-      loading,
-      error,
-      formatDate,
-      cardWidth,
-      slidesToShow,
-      isVisible
-    };
+const loadReviews = async () => {
+  try {
+    loading.value = true;
+    const q = query(collection(db, 'reviews'), orderBy('date', 'desc'));
+    const querySnapshot = await getDocs(q);
+    reviews.value = querySnapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    }));
+  } catch (err) {
+    console.error('Error loading reviews:', err);
+    error.value = 'Помилка завантаження відгуків';
+  } finally {
+    loading.value = false;
   }
 };
+
+const formatDate = (dateString) => {
+  if (!dateString) return '';
+  const date = new Date(dateString);
+  return date.toLocaleDateString('uk-UA', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric'
+  });
+};
+
+const isVisible = (index) => {
+  return index >= currentSlide.value && index < currentSlide.value + slidesToShow.value;
+};
+
+const maxSlideIndex = computed(() => {
+  return Math.max(0, reviews.value.length - slidesToShow.value);
+});
+
+const totalDots = computed(() => {
+  return Math.ceil(reviews.value.length / slidesToShow.value);
+});
+
+const nextSlide = () => {
+  if (currentSlide.value < maxSlideIndex.value) {
+    currentSlide.value = Math.min(maxSlideIndex.value, currentSlide.value + slidesToShow.value);
+  }
+};
+
+const prevSlide = () => {
+  if (currentSlide.value > 0) {
+    currentSlide.value = Math.max(0, currentSlide.value - slidesToShow.value);
+  }
+};
+
+const goToSlide = (index) => {
+  currentSlide.value = Math.min(maxSlideIndex.value, Math.max(0, index));
+};
+
+const openModal = (review) => {
+  selectedReview.value = review;
+  modalVisible.value = true;
+};
+
+const closeModal = () => {
+  modalVisible.value = false;
+  selectedReview.value = null;
+};
+
+onMounted(() => {
+  loadReviews();
+
+  const updateSlidesToShow = () => {
+    if (window.innerWidth < 768) {
+      slidesToShow.value = 1;
+      cardWidth.value = window.innerWidth - 40;
+    } else if (window.innerWidth < 1024) {
+      slidesToShow.value = 2;
+      cardWidth.value = (window.innerWidth - 60) / 2;
+    } else {
+      slidesToShow.value = 3;
+      cardWidth.value = (window.innerWidth - 80) / 3;
+    }
+    currentSlide.value = 0;
+  };
+
+  updateSlidesToShow();
+  window.addEventListener('resize', updateSlidesToShow);
+
+  return () => {
+    window.removeEventListener('resize', updateSlidesToShow);
+  };
+});
 </script>
 
 <style lang="scss" scoped>
@@ -213,7 +250,7 @@ export default {
     text-align: center;
     margin-bottom: 40px;
     font-family: "Noto Sans", sans-serif;
-    animation: fadeIn 1s ease-out; // Added animation
+    animation: fadeIn 1s ease-out;
   }
 
   &__loading {
@@ -244,7 +281,7 @@ export default {
     display: flex;
     overflow: hidden;
     flex: 1;
-    transition: transform 0.5s ease-in-out; // Added transition
+    transition: transform 0.5s ease-in-out;
   }
 
   &__dots {
@@ -252,24 +289,28 @@ export default {
     justify-content: center;
     gap: 8px;
     margin-top: 30px;
-    animation: fadeIn 1s ease-out; // Added animation
+    animation: fadeIn 1s ease-out;
     
     @media (max-width: 768px) {
-      display: none; // Скрываем точки на мобильных устройствах
+      display: none;
     }
   }
 }
 
 .review-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   background: white;
   margin: 0 5px;
   padding: 30px;
   border-radius: 12px;  
   flex: 1;
   min-width: 0;
-  transition: transform 0.3s, opacity 0.3s; // Added transition
+  transition: transform 0.3s, opacity 0.3s;
   opacity: 0;
   animation: slideIn 0.5s forwards ease-out;
+  position: relative;
 
   &:hover {
     transform: translateY(-5px);
@@ -277,7 +318,7 @@ export default {
 
   &__header {
     display: flex;
-    align-items: center;
+    align-items: spase-between;
     margin-bottom: 20px;
   }
 
@@ -322,6 +363,29 @@ export default {
     line-height: 1.5;
     margin: 0;
     animation: fadeIn 0.5s forwards ease-out;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__details {
+    display: block;
+    margin-top: 15px;
+    padding: 8px 16px;
+    background-color: #6ea2e6;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-weight: 500;
+    width: 100%;
+
+    &:hover {
+      background-color: color.adjust(#6ea2e6, $lightness: -10%);
+    }
   }
 }
 
@@ -335,9 +399,9 @@ export default {
   border: none;
   border-radius: 50%;
   cursor: pointer;
-  transition: background-color 0.3s, opacity 0.3s; // Added transition
+  transition: background-color 0.3s, opacity 0.3s;
   opacity: 0.8;
-  animation: fadeIn 1s ease-out; // Added animation
+  animation: fadeIn 1s ease-out;
 
   &:hover {
     background: color.adjust(#6ea2e6, $lightness: -10%);
@@ -371,6 +435,44 @@ export default {
 
 .star-filled {
   color: #ffc107;
+}
+
+/* Стилі для модального вікна */
+.modal-header {
+  h3 {
+    color: #048;
+    margin: 0;
+  }
+}
+
+.modal-content {
+  text-align: center;
+  padding: 20px;
+
+  .modal-avatar {    
+    object-fit: cover;
+    margin-bottom: 15px;
+  }
+
+  .modal-rating {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    margin-bottom: 10px;
+  }
+
+  .modal-date {
+    color: #6c757d;
+    font-size: 14px;
+    margin-bottom: 15px;
+  }
+
+  .modal-text {
+    color: #495057;
+    font-size: 16px;
+    line-height: 1.6;
+    text-align: left;
+  }
 }
 
 @keyframes fadeIn {

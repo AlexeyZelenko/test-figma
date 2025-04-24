@@ -1,5 +1,10 @@
+<script setup>
+import Timeline from '../../Timeline.vue';
+</script>
+
+
 <template>
-  <div class="w-full mx-auto">
+  <div class="desktop-block w-full mx-auto">
     <svg id="1:160" layer-name="Page 3" width="1440" height="812" viewBox="0 0 720 406" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="workflow-diagram" style="width: 100%; max-width: 100%; height: auto">
       <g clip-path="url(#clip0_1_160)">
         <rect width="720" height="405.01" transform="translate(0 0.5)" fill="white"></rect>
@@ -399,12 +404,33 @@
         </clipPath>
       </defs>
     </svg>
+  </div>
 
+  <div class="mobile-block">
+    <h1 class="flex justify-center font-bold text-2xl text-blue-800">СХЕМА РОБОТИ З НАМИ</h1>
+    <Timeline />
   </div>
 </template>
 
-<script>
-export default {
-  name: 'WorkflowDiagram'
+<style scoped lang="scss">
+/* Стилі за замовчуванням (наприклад, для мобільної версії) */
+.desktop-block {
+  display: none; /* За замовчуванням прихований на мобільних */
 }
-</script>
+
+.mobile-block {
+  display: block; /* За замовчуванням видимий на мобільних */
+  margin: 30px auto;
+}
+
+/* Медіа-запит для екранів середнього розміру та більше (наприклад, десктопи) */
+@media (min-width: 768px) {
+  .desktop-block {
+    display: block; /* Показати на десктопах */
+  }
+
+  .mobile-block {
+    display: none; /* Приховати на десктопах */
+  }
+}
+</style>
