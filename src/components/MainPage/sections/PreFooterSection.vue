@@ -36,7 +36,7 @@ $white: white;
   height: 500px;
   padding: 40px 20px;
   text-align: center;
-  background-image: url(/images/slide-three.jpg);
+  background-image: url(/images/parallax-bg.webp);
   background-size: cover;
   background-position: center bottom;
   background-repeat: no-repeat;
@@ -72,16 +72,25 @@ $white: white;
 }
 
 .contact-form__title {
-  @include font-style(700, 2rem); /* Example using mixin */
+  @include font-style(700, 2.5rem); /* Example using mixin */
   color: $white;
   margin-bottom: 1rem;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9); /* Add text shadow for better visibility */
+
+  @media (max-width: 768px) {
+    font-size: 2rem;
+  }
 }
 
 .contact-form__text {
-  @include font-style(400, 24px); /* Example using mixin */
+  margin: 0 auto;
+  @include font-style(400, 2rem); /* Example using mixin */
   color: $white;
   max-width: 980px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9); /* Add text shadow for better visibility */
+
+  @media (max-width: 768px) {
+    font-size: 1.5rem;
+  }
 }
 </style>

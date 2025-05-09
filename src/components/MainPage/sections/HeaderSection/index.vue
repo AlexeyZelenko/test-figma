@@ -6,7 +6,7 @@
           <img
               class="navbar__logo-subtract-1"
               alt="Логотип"
-              src="/images/logo.png"
+              src="/images/logo.webp"
           />
         </div>          
       </div>
@@ -23,10 +23,10 @@
           <i class="pi pi-phone"></i>
           +38 067 473 55 00
         </a>
-        <router-link to="/register" class="header__contact-item register-button">
+        <!-- <router-link to="/register" class="header__contact-item register-button">
           <i class="pi pi-user-plus"></i>
           Реєстрація
-        </router-link>
+        </router-link> -->
       </div>
     </div>
 
@@ -79,7 +79,7 @@ export default defineComponent({
     align-items: center;
     background-color: #fff;
     border-bottom: 1px solid #e5e5e5;
-    background-image: url(/images/top_background.png);
+    background-image: url(/images/top_background.webp);
     background-repeat: repeat-x;
     background-position: bottom;
 

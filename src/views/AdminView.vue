@@ -52,6 +52,16 @@
                     placeholder="Введіть текст відгуку"
                 />
               </div>
+              <div class="p-field md:col-span-2">
+                <label for="text" class="text-gray-600">Опис відгуку</label>
+                <Textarea
+                    id="text"
+                    v-model="newReview.description"
+                    rows="5"
+                    class="w-full"
+                    placeholder="Введіть опис відгуку"
+                />
+              </div>
             </div>
             <div class="flex flex-col">
               <div class="p-field">
@@ -115,9 +125,17 @@
           />
         </div>
 
+        <div class="reviews-management__search">
+          <InputText
+              v-model="searchQuery"
+              placeholder="Пошук за ім'ям"
+              class="w-full"
+          />
+        </div>
+
         <div class="reviews-management__list bg-white mb-4 p-6 rounded-lg shadow-sm">
           <DataTable
-              :value="reviews"
+              :value="filteredReviews"
               :paginator="true"
               :rows="10"
               paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport"
@@ -199,7 +217,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
 import {
@@ -247,12 +265,18 @@ const isEditing = ref(false);
 const deleteDialog = ref(false);
 const deleteReviewData = ref(null);
 
+const searchQuery = ref('');
+const filteredReviews = computed(() => {
+  return reviews.value.filter(review => review.name.toLowerCase().includes(searchQuery.value.toLowerCase()));
+});
+
 // Модель для нового/редагованого відгуку
 const newReview = ref({
   id: null,
   name: '',
   rating: 5,
   text: '',
+  description: '',
   imageUrl: '',
   dateRevocation: ''
 });
@@ -484,7 +508,8 @@ const updateReview = async () => {
       text: newReview.value.text,
       rating: newReview.value.rating,
       imageUrl: newReview.value.imageUrl || '',
-      updatedAt: new Date().toISOString()
+      updatedAt: new Date().toISOString(),
+      description: newReview.value.description
     });
 
     console.log('✅ Відгук оновлено успішно');
@@ -615,6 +640,7 @@ const resetForm = () => {
     name: '',
     rating: 5,
     text: '',
+    description: '',
     imageUrl: ''
   };
   selectedFile.value = null;
@@ -657,6 +683,10 @@ img {
     padding: 1.5rem;
     border-radius: 0.5rem;
   }
+}
+
+.reviews-management__search {  
+  margin: 20px auto;
 }
 
 .reviews-management {

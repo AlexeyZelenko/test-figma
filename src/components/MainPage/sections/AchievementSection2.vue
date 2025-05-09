@@ -85,7 +85,7 @@ $error-color: #EB5757;
 .parallax {
   position: relative;
   height: 500px;
-  background-image: url('/images/parallax-bg.jpg');
+  background-image: url('/images/parallax-bg.webp');
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;

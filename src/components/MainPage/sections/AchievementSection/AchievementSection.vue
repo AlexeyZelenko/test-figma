@@ -55,7 +55,7 @@ $white: white;
 .parallax {
   position: relative;
   height: 500px;
-  background-image: url('/images/parallax-bg.jpg');
+  background-image: url('/images/parallax-bg.webp');
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
@@ -157,11 +157,11 @@ $white: white;
 
     &__title {
       font-size: 28px;
-      margin-bottom: 15px;
+      margin-bottom: 16px;
     }
 
     &__text {
-      font-size: 16px;
+      font-size: 22px;
     }
   }
 }

@@ -28,13 +28,13 @@ const scrollToForm = () => {
     </div> -->
 
     <h1 class="title">
-      Краща нерухомість за кращими цінами
+      Ми працюємо щоб Світ Нерухомості нашого міста став кращим
     </h1>
 
-    <p class="description">
+    <!-- <p class="description">
       Наші переваги у роботі з клієнтом – це об'єктивна оцінка своїх можливостей. 
       Якщо я гарантую результат, значить впевнений у своїх силах та здібностях.
-    </p>
+    </p> -->
 
     <div class="buttons">
       <button class="button button--primary" @click="scrollToReviews">
@@ -52,7 +52,7 @@ const scrollToForm = () => {
 .content {
   position: relative;
   width: 100%;
-  max-width: 519px;
+  max-width: 719px;
   margin-left: 135px;
   padding-top: 100px;  
 
@@ -75,7 +75,7 @@ const scrollToForm = () => {
   color: #0a093d;
   font-size: 56px;
   line-height: 66px;
-  max-width: 515px;
+  max-width: 715px;
 
   @media (max-width: 1024px) {
     font-size: 48px;

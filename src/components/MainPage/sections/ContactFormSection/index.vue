@@ -272,7 +272,7 @@ $white: white;
 .contact-form {
   padding: 40px 20px;
   text-align: center;
-  background-image: url(/images/slide-three.jpg);
+  background-image: url(/images/parallax-bg.webp);
   background-size: cover;
   background-position: center bottom;
   background-repeat: no-repeat;

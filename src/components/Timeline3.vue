@@ -44,6 +44,7 @@ onBeforeUnmount(() => {
         <StepPanel v-slot="{ activateCallback }">
           <div class="flex flex-col h-36" style="margin: 5px">
             <div class="border-2 border-dashed border-surface-200 dark:border-surface-700 rounded bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center text-xl p-2">
+              <i class="pi pi-file-o" style="font-size: 2rem; color: #007bff; margin-right: 5px"></i>
               Ви подаєте заявку
             </div>
           </div>
@@ -57,6 +58,7 @@ onBeforeUnmount(() => {
         <StepPanel v-slot="{ activateCallback }">
           <div class="flex flex-col h-36" style="margin: 5px">
             <div class="border-2 border-dashed border-surface-200 dark:border-surface-700 rounded bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center text-xl">
+              <i class="pi pi-comments" style="font-size: 2rem; color: #6c757d; margin-right: 5px"></i>
               Ми розуміємо завдання
             </div>
           </div>
@@ -70,7 +72,8 @@ onBeforeUnmount(() => {
         <Step>КРОК</Step>
         <StepPanel v-slot="{ activateCallback }">
           <div class="flex flex-col h-36" style="margin: 5px">
-            <div class="border-2 border-dashed border-surface-200 dark:border-surface-700 rounded bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center text-xl">
+            <div style="padding: 10px" class="border-2 border-dashed border-surface-200 dark:border-surface-700 rounded bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center text-xl">
+              <i class="pi pi-pencil" style="font-size: 2rem; color: #28a745; margin-right: 10px"></i>
               Укладаємо договір на послуги
             </div>
           </div>
@@ -84,7 +87,8 @@ onBeforeUnmount(() => {
         <Step>КРОК</Step>
         <StepPanel v-slot="{ activateCallback }">
           <div class="flex flex-col h-36" style="margin: 5px">
-            <div class="border-2 border-dashed border-surface-200 dark:border-surface-700 rounded bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center text-xl px-2">
+            <div style="padding: 10px" class="border-2 border-dashed border-surface-200 dark:border-surface-700 rounded bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center text-xl px-2">
+              <i class="pi pi-cog" style="font-size: 2rem; color: #ffc107; margin-right: 10px"></i>
               <span style="padding: 10px">Покроково виконуємо робочі процеси</span>
             </div>
           </div>
@@ -99,6 +103,7 @@ onBeforeUnmount(() => {
         <StepPanel v-slot="{ activateCallback }">
           <div class="flex flex-col h-36" style="margin: 5px">
             <div style="padding: 10px" class="border-2 border-dashed border-surface-200 dark:border-surface-700 rounded bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center text-xl">
+              <i class="pi pi-chart-bar" style="font-size: 2rem; color: #17a2b8; margin-right: 10px"></i>
               Ви отримуєте регулярні звіти про роботу
             </div>
           </div>
@@ -113,6 +118,7 @@ onBeforeUnmount(() => {
       <StepPanel v-slot="{ activateCallback }">
         <div class="flex flex-col h-36" style="margin: 5px">
           <div style="padding: 10px" class="border-2 border-dashed border-surface-200 dark:border-surface-700 rounded bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center text-xl">
+            <i class="pi pi-users" style="font-size: 2rem; color: #fd7e14; margin-right: 10px"></i>
             Знаходимо покупця або продавця об'єкту нерухомості
           </div>
         </div>
@@ -127,6 +133,7 @@ onBeforeUnmount(() => {
         <StepPanel v-slot="{ activateCallback }">
           <div class="flex flex-col h-36" style="margin: 5px">
             <div style="padding: 20px" class="border-2 border-dashed border-surface-200 dark:border-surface-700 rounded bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center text-xl">
+              <i class="pi pi-briefcase" style="font-size: 2rem; color: #dc3545; margin-right: 10px"></i>
               Супроводжуємо та здійснюємо угоду
             </div>
           </div>
@@ -141,11 +148,28 @@ onBeforeUnmount(() => {
         <StepPanel v-slot="{ activateCallback }">
           <div class="flex flex-col h-36" style="margin: 5px">
             <div style="padding: 20px" class="border-2 border-dashed border-surface-200 dark:border-surface-700 rounded bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center text-xl">
+              <i class="pi pi-check-circle" style="font-size: 2rem; color: #28a745; margin-right: 10px"></i>
               Ви отримуєте бажаний результат
             </div>
           </div>
           <div class="py-6">
             <Button label="НАЗАД" severity="secondary" @click="activateCallback('7')" />
+            <Button label="НАСТУПНИЙ" @click="activateCallback('9')" />
+          </div>
+        </StepPanel>
+      </StepItem>
+      <StepItem value="9">
+        <Step>КРОК</Step>
+        <StepPanel v-slot="{ activateCallback }">
+          <div class="flex flex-col h-36" style="margin: 5px">
+            <div style="padding: 20px" class="border-2 border-dashed border-surface-200 dark:border-surface-700 rounded bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center text-xl">
+              <i class="pi pi-thumbs-up" style="font-size: 2rem; color: #28a745; margin-right: 10px"></i>
+              Ваша позитивна рекомендація - наша найкраща нагорода!
+            </div>
+          </div>
+          <div class="py-6">
+            <Button label="НАЗАД" severity="secondary" @click="activateCallback('8')" />
+            <Button label="НА ПОЧАТОК" severity="success" @click="activateCallback('1')" style="margin: 0 5px"/>
           </div>
         </StepPanel>
       </StepItem>

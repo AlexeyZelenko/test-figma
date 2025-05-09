@@ -1,7 +1,8 @@
 // HomeView.vue
 
 <template>
-  <div class="home">
+  <div class="home"> 
+<!--    <Logo />-->
     <HeaderSection />
     <LazyComponent :component="SchemeWorkWithUs" />
     <LazyComponent :component="ParallaxSection" />
@@ -16,15 +17,12 @@
     <LazyComponent :component="WhoWeWorkWith" />
     <LazyComponent :component="AchievementSection" />
     <LazyComponent :component="AchievementSection2" />
-    <LazyComponent :component="WhoWeDontWorkWith" />
-    <FooterSection />
   </div>
 </template>
 
 <script setup>
 import { defineComponent, defineAsyncComponent } from 'vue';
 import HeaderSection from "../components/MainPage/sections/HeaderSection/index.vue";
-import FooterSection from "../components/MainPage/sections/FooterSection/FooterSection.vue";
 import LazyComponent from "../components/MainPage/sections/LazyComponent.vue";
 
 // Асинхронные компоненты с использованием defineAsyncComponent
@@ -41,7 +39,6 @@ const PreFooterSection = defineAsyncComponent(() => import('../components/MainPa
 const WhoWeWorkWith = defineAsyncComponent(() => import('../components/MainPage/sections/WhoWeWorkWith.vue'));
 const AchievementSection = defineAsyncComponent(() => import('../components/MainPage/sections/AchievementSection/AchievementSection.vue'));
 const AchievementSection2 = defineAsyncComponent(() => import('../components/MainPage/sections/AchievementSection2.vue'));
-const WhoWeDontWorkWith = defineAsyncComponent(() => import('../components/MainPage/sections/WhoWeDontWorkWith.vue'));
 </script>
 
 <style lang="scss" scoped>

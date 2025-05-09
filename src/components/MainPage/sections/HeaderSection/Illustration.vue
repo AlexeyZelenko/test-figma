@@ -8,7 +8,7 @@
     <img
         class="header__vector"
         alt="Vector"
-        src="/images/figure_businessman.jpg"
+        src="/images/figure_businessman.webp"
     />
   </div>
 </template>

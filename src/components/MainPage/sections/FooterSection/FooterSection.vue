@@ -70,7 +70,7 @@ const socialIcons = ref([
   color: #e6e6e6;
   padding: 4rem 0 0;
 
-  background-image: url(/images/background-outer-wrapper.png);
+  background-image: url(/images/background-outer-wrapper.webp);
   background-size: cover;
   background-position: center bottom;
   background-repeat: no-repeat;

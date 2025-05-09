@@ -77,7 +77,7 @@
     <!-- Модальне вікно -->
     <Dialog
       v-model:visible="modalVisible"
-      :style="{ width: '90vw', maxWidth: '500px' }"
+      :style="{ width: '90vw', maxWidth: '700px' }"
       :modal="true"
       :dismissableMask="true"
       @hide="closeModal"
@@ -89,9 +89,9 @@
       </template>
 
       <div class="modal-content">
-        <img 
-          :src="selectedReview?.imageUrl" 
-          :alt="selectedReview?.name" 
+        <ImageLoader
+          :src="selectedReview?.imageUrl"
+          :alt="selectedReview?.name"
           class="modal-avatar"
         />
         <div class="modal-rating">
@@ -103,7 +103,8 @@
           ></i>
         </div>
         <div class="modal-date">{{ formatDate(selectedReview?.date) }}</div>
-        <p class="modal-text">{{ selectedReview?.text }}</p>
+        <p v-if="selectedReview?.description" class="modal-text-description">{{ selectedReview?.description }}</p>
+        <p v-else class="modal-text">{{ selectedReview?.text }}</p>
       </div>
 
       <template #footer>
@@ -124,6 +125,7 @@ import { collection, getDocs, query, orderBy } from 'firebase/firestore';
 import { db } from '../../../../firebase/config';
 import Dialog from 'primevue/dialog';
 import Button from 'primevue/button';
+import ImageLoader from './ImageLoader.vue';
 
 const reviews = ref([]);
 const currentSlide = ref(0);
@@ -441,17 +443,31 @@ onMounted(() => {
 .modal-header {
   h3 {
     color: #048;
-    margin: 0;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 600;
+    font-family: "Noto Sans", sans-serif;
+    margin-left: 20px;
   }
 }
 
 .modal-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
   text-align: center;
-  padding: 20px;
+  padding: 10px;
+  gap: 10px;
 
-  .modal-avatar {    
+  .modal-avatar {
+    min-width: 300px;
+    min-height: 200px;
+    width: 300px;
     object-fit: cover;
     margin-bottom: 15px;
+    box-shadow: 0 0 50px 0 rgba(0, 0, 0, 0.5);    
   }
 
   .modal-rating {
@@ -468,6 +484,13 @@ onMounted(() => {
   }
 
   .modal-text {
+    color: #495057;
+    font-size: 18px;
+    line-height: 1.6;
+    text-align: left;
+  }
+
+  .modal-text-description {
     color: #495057;
     font-size: 16px;
     line-height: 1.6;

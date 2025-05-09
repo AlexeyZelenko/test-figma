@@ -36,10 +36,10 @@ export default defineComponent({
   data() {
     return {
       statistics: [
-      { value: '+10', label: 'Років досвіду' },
-      { value: '+500', label: 'Задоволених клієнтів' },
-      { value: '+500', label: 'Укладених угод' },
-      { value: '+10', label: 'Досвідчених агентів' },
+      { value: '10', label: 'Років досвіду' },
+      { value: '2000', label: 'Задоволених клієнтів' },
+      { value: '1500', label: 'Укладених угод' },
+      { value: '10', label: 'Досвідчених агентів' },
       ] as Statistic[],
     };
   },
